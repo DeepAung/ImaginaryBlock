@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3edutnadp4dl"]
+
+[ext_resource type="Script" path="res://src/world.gd" id="1_jbyb0"]
+[ext_resource type="Texture2D" uid="uid://b0jhum7hbt3cd" path="res://assets/sprites/icons/cube-create.png" id="3_v8lxu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1gj76"]
+load_path = "res://.godot/imported/tutorial.png-4bbf9a05cdf16a3ee6c29b7d2f46ea77.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eagds"]
+load_path = "res://.godot/imported/settings.png-f8701326f21bdf14c3ee408037039104.ctex"
+
+[node name="World" type="Node"]
+script = ExtResource("1_jbyb0")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.995724, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="CubeCreateButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+offset_left = 35.0
+offset_top = 26.0
+offset_right = 535.0
+offset_bottom = 526.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 1
+texture_normal = ExtResource("3_v8lxu")
+texture_pressed = ExtResource("3_v8lxu")
+texture_hover = ExtResource("3_v8lxu")
+texture_disabled = ExtResource("3_v8lxu")
+texture_focused = ExtResource("3_v8lxu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -293.0
+offset_top = 38.0
+offset_right = -43.0
+offset_bottom = 138.0
+grow_horizontal = 0
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="TutorialButton" type="TextureButton" parent="Control/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+texture_normal = SubResource("CompressedTexture2D_1gj76")
+texture_pressed = SubResource("CompressedTexture2D_1gj76")
+texture_hover = SubResource("CompressedTexture2D_1gj76")
+texture_disabled = SubResource("CompressedTexture2D_1gj76")
+texture_focused = SubResource("CompressedTexture2D_1gj76")
+stretch_mode = 0
+
+[node name="SettingButton" type="TextureButton" parent="Control/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+texture_normal = SubResource("CompressedTexture2D_eagds")
+texture_pressed = SubResource("CompressedTexture2D_eagds")
+texture_hover = SubResource("CompressedTexture2D_eagds")
+texture_disabled = SubResource("CompressedTexture2D_eagds")
+texture_focused = SubResource("CompressedTexture2D_eagds")
+stretch_mode = 0
+
+[node name="Blocks" type="Node2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+
+[connection signal="button_down" from="Control/CubeCreateButton" to="." method="_on_cube_create_button_button_down"]

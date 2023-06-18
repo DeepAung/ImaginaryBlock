@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://chgydpx4u3ci2"]
+
+[ext_resource type="Script" path="res://src/cube/cube.gd" id="1_7081j"]
+[ext_resource type="Texture2D" uid="uid://dl1fadxh2n4j2" path="res://assets/sprites/icons/cube.png" id="2_8wjpr"]
+
+[node name="Area2D" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_7081j")
+
+[node name="Block" type="Sprite2D" parent="."]
+texture = ExtResource("2_8wjpr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -252, 220, -124, 220, 124, 0, 252, -220, 124, -220, -124)
