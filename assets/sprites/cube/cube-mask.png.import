@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cwf0way4m4fgm"
+path="res://.godot/imported/cube-mask.png-ae1794197e631807958e0057054e5ad1.res"
+
+[deps]
+
+source_file="res://assets/sprites/cube/cube-mask.png"
+dest_files=["res://.godot/imported/cube-mask.png-ae1794197e631807958e0057054e5ad1.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

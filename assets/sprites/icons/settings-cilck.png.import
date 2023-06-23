@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl1fadxh2n4j2"
-path="res://.godot/imported/cube.png-62490ea67cab741b8a180f61d07a8098.ctex"
+uid="uid://djkijl0equds8"
+path="res://.godot/imported/settings-cilck.png-51bb46b0e33ff44a875d3d30c317ead9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/cube.png"
-dest_files=["res://.godot/imported/cube.png-62490ea67cab741b8a180f61d07a8098.ctex"]
+source_file="res://assets/sprites/icons/settings-cilck.png"
+dest_files=["res://.godot/imported/settings-cilck.png-51bb46b0e33ff44a875d3d30c317ead9.ctex"]
 
 [params]
 
