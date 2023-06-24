@@ -1,0 +1,152 @@
+[gd_scene load_steps=13 format=3 uid="uid://dlxftuh6lo32m"]
+
+[ext_resource type="Texture2D" uid="uid://cs0vc5qujq45f" path="res://assets/sprites/button/cube-create.png" id="1_3in48"]
+[ext_resource type="Script" path="res://src/menus/tutorial_menu.gd" id="1_4707p"]
+[ext_resource type="Texture2D" uid="uid://j3ovxcegaohr" path="res://assets/sprites/keyboard-icons/ctrl-normal-01.png" id="2_4js6h"]
+[ext_resource type="Texture2D" uid="uid://devxholhxj4rf" path="res://assets/sprites/button/back-01.png" id="2_cwi6v"]
+[ext_resource type="Texture2D" uid="uid://bhdlqd0v84yem" path="res://assets/sprites/keyboard-icons/ctrl-click-01.png" id="3_6wv8y"]
+[ext_resource type="Texture2D" uid="uid://b7k4iai24gio4" path="res://assets/sprites/keyboard-icons/alt-normal-01.png" id="4_r3vdo"]
+[ext_resource type="Texture2D" uid="uid://bv6dpijg4xak5" path="res://assets/sprites/keyboard-icons/alt-click-01.png" id="5_ysoq4"]
+[ext_resource type="Texture2D" uid="uid://c8dk7mdcrtmcx" path="res://assets/sprites/keyboard-icons/del-normal-01.png" id="6_qbny5"]
+[ext_resource type="Texture2D" uid="uid://dwsj3pjehme2q" path="res://assets/sprites/keyboard-icons/del-click-01.png" id="7_2lm7m"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_no8kt"]
+frames = 2
+frame_0/texture = ExtResource("2_4js6h")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("3_6wv8y")
+frame_1/duration = 0.5
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_lgm7p"]
+frames = 2
+frame_0/texture = ExtResource("4_r3vdo")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("5_ysoq4")
+frame_1/duration = 0.5
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_1c2tr"]
+frames = 2
+frame_0/texture = ExtResource("6_qbny5")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("7_2lm7m")
+frame_1/duration = 0.5
+
+[node name="TutorialMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4707p")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+
+[node name="Title" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 39.0
+offset_bottom = 141.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_colors/font_outline_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 72
+text = "Tutorial"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="Background"]
+offset_left = 85.0
+offset_top = 36.0
+offset_right = 585.0
+offset_bottom = 536.0
+scale = Vector2(0.217933, 0.217933)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_cwi6v")
+
+[node name="CenterContainer" type="CenterContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 204.0
+offset_right = 4480.0
+offset_bottom = 2044.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 300
+
+[node name="Cube-create" type="TextureRect" parent="Background/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_3in48")
+
+[node name="Detail" type="Label" parent="Background/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_font_sizes/font_size = 150
+text = "- Click top-left icon and move for creating new block."
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Background/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 300
+
+[node name="CtrlRect" type="TextureRect" parent="Background/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_no8kt")
+
+[node name="Detail" type="Label" parent="Background/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_font_sizes/font_size = 150
+text = "- Hold CTRL and click on blocks for multiple selecting."
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Background/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 300
+
+[node name="AltRect" type="TextureRect" parent="Background/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_lgm7p")
+
+[node name="Detail" type="Label" parent="Background/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_font_sizes/font_size = 150
+text = "- Hold ALT while moving blocks for duplicating."
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Background/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 300
+
+[node name="DelRect" type="TextureRect" parent="Background/CenterContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_1c2tr")
+
+[node name="Detail" type="Label" parent="Background/CenterContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_font_sizes/font_size = 150
+text = "- Click DEL for deleting blocks."
+vertical_alignment = 1
+
+[connection signal="pressed" from="Background/BackButton" to="." method="_on_back_button_pressed"]

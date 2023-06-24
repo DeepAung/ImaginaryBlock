@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ts4nmku0yrg"
-path="res://.godot/imported/settings-normal.png-ab370a574f61c222d4c3447cd522b3eb.ctex"
+uid="uid://bv6dpijg4xak5"
+path="res://.godot/imported/alt-click-01.png-b4767a58083b651b5cd293019304ad8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/settings-normal.png"
-dest_files=["res://.godot/imported/settings-normal.png-ab370a574f61c222d4c3447cd522b3eb.ctex"]
+source_file="res://assets/sprites/keyboard-icons/alt-click-01.png"
+dest_files=["res://.godot/imported/alt-click-01.png-b4767a58083b651b5cd293019304ad8d.ctex"]
 
 [params]
 

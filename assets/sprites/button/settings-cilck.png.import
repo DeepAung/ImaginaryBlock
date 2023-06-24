@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xj23cbeyarwv"
-path="res://.godot/imported/tutorial-click.png-2ba141030ddfbf0363e8fe526177d869.ctex"
+uid="uid://djkijl0equds8"
+path="res://.godot/imported/settings-cilck.png-9f5cc0d826ca8db80f54226d4da9f39e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/tutorial-click.png"
-dest_files=["res://.godot/imported/tutorial-click.png-2ba141030ddfbf0363e8fe526177d869.ctex"]
+source_file="res://assets/sprites/button/settings-cilck.png"
+dest_files=["res://.godot/imported/settings-cilck.png-9f5cc0d826ca8db80f54226d4da9f39e.ctex"]
 
 [params]
 

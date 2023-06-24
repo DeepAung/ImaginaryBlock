@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0lyk2gttrap5"
-path="res://.godot/imported/tutorial-normal.png-65ba41d61bc8d232a0ca71e429f0fd60.ctex"
+uid="uid://j3ovxcegaohr"
+path="res://.godot/imported/ctrl-normal-01.png-f1bcb96521642325f522218c1c761f3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/tutorial-normal.png"
-dest_files=["res://.godot/imported/tutorial-normal.png-65ba41d61bc8d232a0ca71e429f0fd60.ctex"]
+source_file="res://assets/sprites/keyboard-icons/ctrl-normal-01.png"
+dest_files=["res://.godot/imported/ctrl-normal-01.png-f1bcb96521642325f522218c1c761f3d.ctex"]
 
 [params]
 

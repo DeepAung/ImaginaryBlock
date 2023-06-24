@@ -1,7 +1,7 @@
 extends Node
 
 
-const SELECTED_MODULATE = Color(0, 1, 1, 1)
+const SELECTED_MODULATE = Color(0.6, 1, 1, 1)
 const UNSELECTED_MODULATE = Color(1, 1, 1, 1)
 
 var selected_cubes: Array[Cube] = []

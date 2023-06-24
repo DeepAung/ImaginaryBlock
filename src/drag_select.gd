@@ -14,7 +14,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		dragging = true
 		drag_start = get_global_mouse_position()
 	elif dragging and Input.is_action_just_released("left_click"):
-		dragging = false		
+		dragging = false
+		queue_redraw()
 		select_intersect_cubes()
 	elif event is InputEventMouseMotion:
 		queue_redraw()
@@ -47,5 +48,4 @@ func clear_drag_select():
 
 func _on_area_entered(area: Area2D) -> void:
 	var cube = area.get_parent() as Cube
-	print("-----------------")
 	Game.add_selected_cube(cube)

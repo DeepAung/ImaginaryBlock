@@ -1,23 +1,7 @@
 extends Node
 
 
-@onready var cube_create_button: TextureButton = $Control/CubeCreateButton
-
 var cube_scene = preload("res://src/cube/cube.tscn")
-
-func _on_cube_create_button_button_down() -> void:
-	var cube: Cube = cube_scene.instantiate()
-	cube.global_position = cube_create_button.global_position
-	
-	$Cubes.add_child(cube)
-	
-	Game.clear_selected_cubes()
-	Game.add_selected_cube(cube)
-	EventBus.cube_clicked.emit()
-
-
-# ------------------------------------- #
-
 
 var dragging: bool = false
 var is_dragged: bool = false

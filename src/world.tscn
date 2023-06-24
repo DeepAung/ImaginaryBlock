@@ -1,76 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3edutnadp4dl"]
+[gd_scene load_steps=4 format=3 uid="uid://d3edutnadp4dl"]
 
 [ext_resource type="Script" path="res://src/world.gd" id="1_jbyb0"]
-[ext_resource type="Texture2D" uid="uid://7ts4nmku0yrg" path="res://assets/sprites/icons/settings-normal.png" id="3_5j6kg"]
-[ext_resource type="Texture2D" uid="uid://cs0vc5qujq45f" path="res://assets/sprites/icons/cube-create.png" id="3_v8lxu"]
-[ext_resource type="Texture2D" uid="uid://djkijl0equds8" path="res://assets/sprites/icons/settings-cilck.png" id="4_2f24w"]
+[ext_resource type="PackedScene" uid="uid://c6u4p1jm8iypv" path="res://src/menus/main_menu.tscn" id="2_3cb18"]
 [ext_resource type="Script" path="res://src/drag_select.gd" id="4_hx6tl"]
-[ext_resource type="Texture2D" uid="uid://b0lyk2gttrap5" path="res://assets/sprites/icons/tutorial-normal.png" id="5_tkdgk"]
-[ext_resource type="Texture2D" uid="uid://xj23cbeyarwv" path="res://assets/sprites/icons/tutorial-click.png" id="6_85ei7"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_jbyb0")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.995724, 1)
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 1
+[node name="MainMenu" parent="." instance=ExtResource("2_3cb18")]
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.94902, 0.960784, 0.972549, 1)
-
-[node name="CubeCreateButton" type="TextureButton" parent="Control"]
-layout_mode = 1
-offset_left = 35.0
-offset_top = 26.0
-offset_right = 535.0
-offset_bottom = 526.0
-scale = Vector2(0.25, 0.25)
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("3_v8lxu")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -293.0
-offset_top = 38.0
-offset_right = -43.0
-offset_bottom = 138.0
-grow_horizontal = 0
-theme_override_constants/separation = 50
-alignment = 2
-
-[node name="TutorialButton" type="TextureButton" parent="Control/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("3_5j6kg")
-texture_pressed = ExtResource("4_2f24w")
-stretch_mode = 0
-
-[node name="SettingButton" type="TextureButton" parent="Control/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("5_tkdgk")
-texture_pressed = ExtResource("6_85ei7")
-stretch_mode = 0
-
-[node name="Cubes" type="Node2D" parent="."]
+[node name="Cubes" type="Node2D" parent="." groups=["cubes_container"]]
 z_index = 1
 y_sort_enabled = true
 
@@ -81,5 +20,4 @@ script = ExtResource("4_hx6tl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DragSelect"]
 
-[connection signal="button_down" from="Control/CubeCreateButton" to="." method="_on_cube_create_button_button_down"]
 [connection signal="area_entered" from="DragSelect" to="DragSelect" method="_on_area_entered"]
