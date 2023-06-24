@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwsj3pjehme2q"
-path="res://.godot/imported/del-click-01.png-59c41c3ea2d90ee6e58d96627c8fc378.ctex"
+uid="uid://bu7ceunoic1ro"
+path="res://.godot/imported/undo-click.png-0e893dc92568f3a182999a6cf6481267.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/keyboard-icons/del-click-01.png"
-dest_files=["res://.godot/imported/del-click-01.png-59c41c3ea2d90ee6e58d96627c8fc378.ctex"]
+source_file="res://assets/sprites/buttons/undo-click.png"
+dest_files=["res://.godot/imported/undo-click.png-0e893dc92568f3a182999a6cf6481267.ctex"]
 
 [params]
 

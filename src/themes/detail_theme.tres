@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://1wrb5fh7xjtb"]
+
+[sub_resource type="SystemFont" id="SystemFont_a46wq"]
+font_names = PackedStringArray("Bungee")
+
+[resource]
+Label/colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+Label/font_sizes/font_size = 140
+Label/fonts/font = SubResource("SystemFont_a46wq")

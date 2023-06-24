@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xj23cbeyarwv"
-path="res://.godot/imported/tutorial-click.png-41b0b37bf02a1a79c486d6dfcd9c4cf9.ctex"
+uid="uid://bv6dpijg4xak5"
+path="res://.godot/imported/alt-click-01.png-401dc972523f716e466e94b3c04daa7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/button/tutorial-click.png"
-dest_files=["res://.godot/imported/tutorial-click.png-41b0b37bf02a1a79c486d6dfcd9c4cf9.ctex"]
+source_file="res://assets/sprites/keyboard-buttons/alt-click-01.png"
+dest_files=["res://.godot/imported/alt-click-01.png-401dc972523f716e466e94b3c04daa7e.ctex"]
 
 [params]
 

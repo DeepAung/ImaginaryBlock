@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://48gf3tli12ej"
-path="res://.godot/imported/cube.png-776a7ed80442fa54cb45d96f9fdc8c3b.ctex"
+uid="uid://bhdlqd0v84yem"
+path="res://.godot/imported/ctrl-click-01.png-4eda882496931251b82d9b8653ea780d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cube/cube.png"
-dest_files=["res://.godot/imported/cube.png-776a7ed80442fa54cb45d96f9fdc8c3b.ctex"]
+source_file="res://assets/sprites/keyboard-buttons/ctrl-click-01.png"
+dest_files=["res://.godot/imported/ctrl-click-01.png-4eda882496931251b82d9b8653ea780d.ctex"]
 
 [params]
 

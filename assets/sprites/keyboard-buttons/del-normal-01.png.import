@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ts4nmku0yrg"
-path="res://.godot/imported/settings-normal.png-a3facff5e4443a076705a51dee95d342.ctex"
+uid="uid://c8dk7mdcrtmcx"
+path="res://.godot/imported/del-normal-01.png-53feb681a6ad303fd9f29e894692e6c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/button/settings-normal.png"
-dest_files=["res://.godot/imported/settings-normal.png-a3facff5e4443a076705a51dee95d342.ctex"]
+source_file="res://assets/sprites/keyboard-buttons/del-normal-01.png"
+dest_files=["res://.godot/imported/del-normal-01.png-53feb681a6ad303fd9f29e894692e6c9.ctex"]
 
 [params]
 

@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6u4p1jm8iypv"]
+[gd_scene load_steps=11 format=3 uid="uid://c6u4p1jm8iypv"]
 
 [ext_resource type="Script" path="res://src/menus/main_menu.gd" id="1_t15s0"]
-[ext_resource type="Texture2D" uid="uid://cs0vc5qujq45f" path="res://assets/sprites/button/cube-create.png" id="2_a7sw6"]
-[ext_resource type="Texture2D" uid="uid://b0lyk2gttrap5" path="res://assets/sprites/button/tutorial-normal.png" id="3_rm745"]
-[ext_resource type="Texture2D" uid="uid://xj23cbeyarwv" path="res://assets/sprites/button/tutorial-click.png" id="4_g0c6f"]
-[ext_resource type="Texture2D" uid="uid://7ts4nmku0yrg" path="res://assets/sprites/button/settings-normal.png" id="5_fmpxd"]
-[ext_resource type="Texture2D" uid="uid://djkijl0equds8" path="res://assets/sprites/button/settings-cilck.png" id="6_n8mfe"]
+[ext_resource type="Texture2D" uid="uid://cs0vc5qujq45f" path="res://assets/sprites/buttons/cube-create.png" id="2_rbxm1"]
+[ext_resource type="Texture2D" uid="uid://c1fdeseltq0fx" path="res://assets/sprites/buttons/undo.png" id="3_0uiml"]
+[ext_resource type="Texture2D" uid="uid://cpwchx01t6ef2" path="res://assets/sprites/buttons/tutorial-click.png" id="3_tvowq"]
+[ext_resource type="Texture2D" uid="uid://bu7ceunoic1ro" path="res://assets/sprites/buttons/undo-click.png" id="4_gmpdy"]
+[ext_resource type="Texture2D" uid="uid://b17348omhmxl4" path="res://assets/sprites/buttons/redo.png" id="5_45vm1"]
+[ext_resource type="Texture2D" uid="uid://darfamrydirrc" path="res://assets/sprites/buttons/redo-click.png" id="6_6qnik"]
+[ext_resource type="Texture2D" uid="uid://gkjiyeskbtvr" path="res://assets/sprites/buttons/tutorial.png" id="7_okjy1"]
+[ext_resource type="Texture2D" uid="uid://cv7e2nwqbqm5c" path="res://assets/sprites/buttons/setting.png" id="9_1bn56"]
+[ext_resource type="Texture2D" uid="uid://b37bo7q5qybtg" path="res://assets/sprites/buttons/setting-click.png" id="10_v3hm1"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -39,34 +43,51 @@ offset_right = 535.0
 offset_bottom = 526.0
 scale = Vector2(0.25, 0.25)
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("2_a7sw6")
+texture_normal = ExtResource("2_rbxm1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -293.0
+offset_left = -522.988
 offset_top = 38.0
-offset_right = -43.0
-offset_bottom = 138.0
+offset_right = 1777.01
+offset_bottom = 538.0
 grow_horizontal = 0
-theme_override_constants/separation = 50
+scale = Vector2(0.2, 0.2)
+theme_override_constants/separation = 100
 alignment = 2
+
+[node name="UndoButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_0uiml")
+texture_pressed = ExtResource("4_gmpdy")
+stretch_mode = 0
+
+[node name="RedoButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_45vm1")
+texture_pressed = ExtResource("6_6qnik")
+stretch_mode = 0
 
 [node name="TutorialButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("3_rm745")
-texture_pressed = ExtResource("4_g0c6f")
+texture_normal = ExtResource("7_okjy1")
+texture_pressed = ExtResource("3_tvowq")
 stretch_mode = 0
 
 [node name="SettingButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("5_fmpxd")
-texture_pressed = ExtResource("6_n8mfe")
+texture_normal = ExtResource("9_1bn56")
+texture_pressed = ExtResource("10_v3hm1")
 stretch_mode = 0
 
 [connection signal="button_down" from="CubeCreateButton" to="." method="_on_cube_create_button_button_down"]
-[connection signal="button_down" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_button_down"]
+[connection signal="pressed" from="HBoxContainer/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]

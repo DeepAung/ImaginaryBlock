@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://48gf3tli12ej"
-path="res://.godot/imported/cube.png-776a7ed80442fa54cb45d96f9fdc8c3b.ctex"
+uid="uid://cv7e2nwqbqm5c"
+path="res://.godot/imported/setting.png-9c4f7657ace62376f78cce3d2eaa6758.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cube/cube.png"
-dest_files=["res://.godot/imported/cube.png-776a7ed80442fa54cb45d96f9fdc8c3b.ctex"]
+source_file="res://assets/sprites/buttons/setting.png"
+dest_files=["res://.godot/imported/setting.png-9c4f7657ace62376f78cce3d2eaa6758.ctex"]
 
 [params]
 

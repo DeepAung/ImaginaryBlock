@@ -1,33 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://chgydpx4u3ci2"]
 
-[ext_resource type="Texture2D" uid="uid://dod77ydy5gxe7" path="res://assets/sprites/cube/cube.png" id="1_5w5ag"]
 [ext_resource type="Script" path="res://src/cube/cube.gd" id="1_7081j"]
-[ext_resource type="BitMap" uid="uid://cwf0way4m4fgm" path="res://assets/sprites/cube/cube-mask.png" id="2_7yklw"]
+[ext_resource type="Texture2D" uid="uid://48gf3tli12ej" path="res://assets/sprites/cube/cube.png" id="1_bf7m2"]
+[ext_resource type="BitMap" uid="uid://cpuq14up073vq" path="res://assets/sprites/cube/cube-mask.png" id="2_6teg4"]
 
 [node name="TextureButton" type="TextureButton" groups=["cubes"]]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -460.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 500.0
+offset_bottom = 500.0
 scale = Vector2(0.25, 0.25)
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("1_5w5ag")
-texture_click_mask = ExtResource("2_7yklw")
+texture_normal = ExtResource("1_bf7m2")
+texture_click_mask = ExtResource("2_6teg4")
 script = ExtResource("1_7081j")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(250, 250)
+position = Vector2(250, 216.3)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, -252, 220, -130, 220, 124, 0, 252, -220, 124, -220, -130)
+polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

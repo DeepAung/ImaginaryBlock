@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv6dpijg4xak5"
-path="res://.godot/imported/alt-click-01.png-b4767a58083b651b5cd293019304ad8d.ctex"
+uid="uid://dwsj3pjehme2q"
+path="res://.godot/imported/del-click-01.png-869f864a7633572b6121536c930da1d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/keyboard-icons/alt-click-01.png"
-dest_files=["res://.godot/imported/alt-click-01.png-b4767a58083b651b5cd293019304ad8d.ctex"]
+source_file="res://assets/sprites/keyboard-buttons/del-click-01.png"
+dest_files=["res://.godot/imported/del-click-01.png-869f864a7633572b6121536c930da1d9.ctex"]
 
 [params]
 

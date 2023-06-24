@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j3ovxcegaohr"
-path="res://.godot/imported/ctrl-normal-01.png-f1bcb96521642325f522218c1c761f3d.ctex"
+uid="uid://b17348omhmxl4"
+path="res://.godot/imported/redo.png-f9a7c160b255968274e7bace2702b20a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/keyboard-icons/ctrl-normal-01.png"
-dest_files=["res://.godot/imported/ctrl-normal-01.png-f1bcb96521642325f522218c1c761f3d.ctex"]
+source_file="res://assets/sprites/buttons/redo.png"
+dest_files=["res://.godot/imported/redo.png-f9a7c160b255968274e7bace2702b20a.ctex"]
 
 [params]
 

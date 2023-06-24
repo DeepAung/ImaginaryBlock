@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8dk7mdcrtmcx"
-path="res://.godot/imported/del-normal-01.png-21b06866e65d6abcbbbf606c3cb57e34.ctex"
+uid="uid://cpwchx01t6ef2"
+path="res://.godot/imported/tutorial-click.png-69c52ee1ae312ff4b6a0725ef5971706.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/keyboard-icons/del-normal-01.png"
-dest_files=["res://.godot/imported/del-normal-01.png-21b06866e65d6abcbbbf606c3cb57e34.ctex"]
+source_file="res://assets/sprites/buttons/tutorial-click.png"
+dest_files=["res://.godot/imported/tutorial-click.png-69c52ee1ae312ff4b6a0725ef5971706.ctex"]
 
 [params]
 

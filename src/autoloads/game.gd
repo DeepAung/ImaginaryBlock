@@ -9,6 +9,7 @@ var cubes_offset: Array[Vector2] = []
 
 var cube_scene = preload("res://src/cube/cube.tscn")
 
+
 func add_selected_cube(cube: Cube):
 	cube.modulate = SELECTED_MODULATE
 	selected_cubes.push_back(cube)

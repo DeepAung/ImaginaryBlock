@@ -19,6 +19,14 @@ func _on_cube_create_button_button_down() -> void:
 	EventBus.cube_clicked.emit()
 
 
-func _on_tutorial_button_button_down() -> void:
+func _on_tutorial_button_pressed() -> void:
 	var tutorial_menu = tutorial_menu_scene.instantiate()
 	add_child(tutorial_menu)
+
+
+func _on_undo_button_pressed() -> void:
+	HistoryManager.undo_history()
+
+
+func _on_redo_button_pressed() -> void:
+	HistoryManager.redo_history()

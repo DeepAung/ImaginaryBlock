@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhdlqd0v84yem"
-path="res://.godot/imported/ctrl-click-01.png-2672aae9e3a61c49ed89b8ae79213eda.ctex"
+uid="uid://b37bo7q5qybtg"
+path="res://.godot/imported/setting-click.png-6fd9430a4a508d5a8793a8cad6a44bb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/keyboard-icons/ctrl-click-01.png"
-dest_files=["res://.godot/imported/ctrl-click-01.png-2672aae9e3a61c49ed89b8ae79213eda.ctex"]
+source_file="res://assets/sprites/buttons/setting-click.png"
+dest_files=["res://.godot/imported/setting-click.png-6fd9430a4a508d5a8793a8cad6a44bb6.ctex"]
 
 [params]
 

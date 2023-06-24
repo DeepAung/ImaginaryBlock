@@ -28,6 +28,9 @@ func _on_cube_clicked():
 func _input(event: InputEvent) -> void:
 	if dragging and Input.is_action_just_released("left_click"):
 		Game.clear_cubes_offset()
+		if is_dragged:
+			EventBus.dragging_ended.emit()
+		
 		dragging = false
 		is_dragged = false
 	

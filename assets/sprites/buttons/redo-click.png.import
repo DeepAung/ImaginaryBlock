@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djkijl0equds8"
-path="res://.godot/imported/settings-cilck.png-9f5cc0d826ca8db80f54226d4da9f39e.ctex"
+uid="uid://darfamrydirrc"
+path="res://.godot/imported/redo-click.png-7d238f3acdc86508fa42db1aa6b09e79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/button/settings-cilck.png"
-dest_files=["res://.godot/imported/settings-cilck.png-9f5cc0d826ca8db80f54226d4da9f39e.ctex"]
+source_file="res://assets/sprites/buttons/redo-click.png"
+dest_files=["res://.godot/imported/redo-click.png-7d238f3acdc86508fa42db1aa6b09e79.ctex"]
 
 [params]
 
