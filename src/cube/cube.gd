@@ -3,6 +3,7 @@ class_name Cube
 
 
 enum { TOP=0, TOP_RIGHT=1, BOTTOM_RIGHT=2, BOTTOM=3, BOTTOM_LEFT=4, TOP_LEFT=5, CENTER=6 }
+
 const JOIN_ARRAY = [
 	[CENTER, TOP_LEFT],  # back left
 	[CENTER, TOP_RIGHT], # back right
@@ -10,6 +11,15 @@ const JOIN_ARRAY = [
 	[TOP_LEFT, CENTER],  # front right
 	[BOTTOM, CENTER],    # above
 	[CENTER, BOTTOM],    # under
+]
+
+const JOIN_ARRAY_DELTA = [
+	[0, 0, -1],
+	[0, -1, 0],
+	[0, 1, 0],
+	[0, 0, 1],
+	[-1, 0, 0],
+	[1, 0, 0]
 ]
 
 const SNAP_RANGE = 20.0
@@ -27,7 +37,7 @@ func get_snap():
 
 	for area in areas:
 		var other_cube = area.get_parent() as Cube
-		if Game.selected_cubes.has(other_cube): continue
+		if SelectManager.is_in_selected_cubes(other_cube): continue
 		
 		var result = get_snap_to(other_cube)
 		var snap_dist = result[0]
@@ -38,13 +48,15 @@ func get_snap():
 	if dists.is_empty(): return null
 
 	dists.sort()
-	return dists[0] # snap_dist, snap_offset, new_z_index
+	return dists[0] # snap_dist, snap_offset, new_z_index, snap_cube, JOIN_ARRAY_idx
 
 
 func get_snap_to(other: Cube):
 	var min_dist = -1
 	var snap_offset = Vector2.ZERO
 	var new_z_index = other.z_index
+	var snap_cube = null
+	var JOIN_ARRAY_idx = -1
 	
 	for idx in range(JOIN_ARRAY.size()):
 		var item = JOIN_ARRAY[idx]
@@ -56,11 +68,13 @@ func get_snap_to(other: Cube):
 		if min_dist == -1 or cur_dist < min_dist:
 			min_dist = cur_dist
 			snap_offset = other_pos - my_pos
+			snap_cube = other
+			JOIN_ARRAY_idx = idx
 
 			if idx == 4: new_z_index += 1 # above
 			elif idx == 5: new_z_index -= 1 # under
 	
-	return [min_dist, snap_offset, new_z_index]
+	return [min_dist, snap_offset, new_z_index, snap_cube, JOIN_ARRAY_idx]
 
 
 func get_pos_offset(direction: int) -> Vector2:
@@ -76,14 +90,14 @@ func get_pos_offset(direction: int) -> Vector2:
 
 func _on_button_down() -> void:
 	if Input.is_action_pressed("ctrl"):
-		if Game.selected_cubes.has(self):
-			Game.remove_selected_cube(self)
+		if SelectManager.is_in_selected_cubes(self):
+			SelectManager.remove_selected_cube(self)
 		else:
-			Game.add_selected_cube(self)
+			SelectManager.add_selected_cube(self)
 			EventBus.cube_clicked.emit()
 	else:
-		if not Game.selected_cubes.has(self):
-			Game.clear_selected_cubes()
-			Game.add_selected_cube(self)
+		if not SelectManager.is_in_selected_cubes(self):
+			SelectManager.clear_selected_cubes()
+			SelectManager.add_selected_cube(self)
 
 		EventBus.cube_clicked.emit()

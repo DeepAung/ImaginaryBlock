@@ -17,9 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Game="*res://src/autoloads/game.gd"
+SelectManager="*res://src/autoloads/select_manager.gd"
 EventBus="*res://src/autoloads/event_bus.gd"
 HistoryManager="*res://src/autoloads/history_manager.gd"
+RotateManager="*res://src/autoloads/rotate_manager.gd"
+InputManager="*res://src/autoloads/input_manager.gd"
 
 [display]
 
@@ -35,7 +37,6 @@ ui_redo={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":true,"pressed":false,"keycode":90,"physical_keycode":0,"key_label":0,"unicode":90,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":false,"pressed":false,"keycode":89,"physical_keycode":0,"key_label":0,"unicode":89,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 left_click={

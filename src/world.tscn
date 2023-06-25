@@ -9,7 +9,7 @@ script = ExtResource("1_jbyb0")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_3cb18")]
 
-[node name="Cubes" type="Node2D" parent="." groups=["cubes_container"]]
+[node name="CubesContainer" type="Node2D" parent="." groups=["cubes_container"]]
 z_index = 1
 y_sort_enabled = true
 

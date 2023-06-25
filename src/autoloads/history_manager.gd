@@ -18,18 +18,13 @@ var cube_scene = preload("res://src/cube/cube.tscn")
 
 func _ready() -> void:
 	save_history()
-	EventBus.dragging_ended.connect(save_history)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_redo"):
-		redo_history()
 	
-	elif Input.is_action_just_pressed("ui_undo"):
-		undo_history()
+	EventBus.dragging_ended.connect(func(is_dragged: bool):
+		if is_dragged: save_history()
+	)
 
 
-func save_history():
+func save_history():	
 	var cubes = get_tree().get_nodes_in_group("cubes")
 	var cubes_info = cubes.map( func (cube: Cube):
 		return CubeInfo.new(cube.position, cube.z_index)
@@ -46,7 +41,7 @@ func save_history():
 func undo_history():
 	if cur_index - 1 < 0: return
 	
-	Game.clear_selected_cubes()
+	SelectManager.clear_selected_cubes()
 	cur_index -= 1
 	go_to_history()
 
@@ -54,7 +49,7 @@ func undo_history():
 func redo_history():
 	if cur_index + 1 >= history_cubes.size(): return
 	
-	Game.clear_selected_cubes()
+	SelectManager.clear_selected_cubes()
 	cur_index += 1
 	go_to_history()
 

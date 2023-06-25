@@ -14,8 +14,8 @@ func _on_cube_create_button_button_down() -> void:
 	var cubes_container = get_tree().get_first_node_in_group("cubes_container")
 	cubes_container.add_child(cube)
 	
-	Game.clear_selected_cubes()
-	Game.add_selected_cube(cube)
+	SelectManager.clear_selected_cubes()
+	SelectManager.add_selected_cube(cube)
 	EventBus.cube_clicked.emit()
 
 

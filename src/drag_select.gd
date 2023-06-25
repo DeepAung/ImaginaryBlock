@@ -48,4 +48,4 @@ func clear_drag_select():
 
 func _on_area_entered(area: Area2D) -> void:
 	var cube = area.get_parent() as Cube
-	Game.add_selected_cube(cube)
+	SelectManager.add_selected_cube(cube)

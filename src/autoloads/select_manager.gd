@@ -4,28 +4,28 @@ extends Node
 const SELECTED_MODULATE = Color(0.6, 1, 1, 1)
 const UNSELECTED_MODULATE = Color(1, 1, 1, 1)
 
+#var cube_graphs: CubeGraphs
+
 var selected_cubes: Array[Cube] = []
 var cubes_offset: Array[Vector2] = []
 
 var cube_scene = preload("res://src/cube/cube.tscn")
 
 
+func _ready() -> void:
+	EventBus.dragging_started.connect(set_cubes_offset)
+	EventBus.dragging_ended.connect(clear_cubes_offset)
+
+
 func add_selected_cube(cube: Cube):
+	if is_in_selected_cubes(cube): return
+	
 	cube.modulate = SELECTED_MODULATE
 	selected_cubes.push_back(cube)
 
 
-func add_selected_cubes(cubes: Array[Cube]):
-	for cube in cubes:
-		if cube.modulate == SELECTED_MODULATE: continue
-		
-		cube.modulate = SELECTED_MODULATE
-		selected_cubes.push_back(cube)
-
-
 func remove_selected_cube(cube: Cube):
 	cube.modulate = UNSELECTED_MODULATE
-	
 	selected_cubes.erase(cube)
 
 
@@ -34,6 +34,10 @@ func clear_selected_cubes():
 		cube.modulate = UNSELECTED_MODULATE
 	
 	selected_cubes = []
+
+
+func is_in_selected_cubes(cube: Cube):
+	return cube.modulate == SELECTED_MODULATE
 
 
 func set_cubes_offset():
