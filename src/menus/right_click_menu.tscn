@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpqyxvqedxk8t"]
+
+[ext_resource type="Script" path="res://src/menus/right_click_menu.gd" id="1_8tp7w"]
+[ext_resource type="Theme" uid="uid://ed74we2i2l5j" path="res://src/themes/right_click_menu_theme.tres" id="1_35u0u"]
+
+[node name="RightClickMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8tp7w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1520.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="RotateTop" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "rotate top axis"
+
+[node name="RotateTopAnti" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "rotate top axis (anti)"
+
+[node name="RotateFront" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "rotate front axis"
+
+[node name="RotateFrontAnti" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "rotate front axis (anti)"
+
+[node name="RotateSide" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "rotate side axis"
+
+[node name="RotateSideAnti" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "rotate side axis (anti)"
+
+[connection signal="pressed" from="VBoxContainer/RotateTop" to="." method="_on_rotate_top_pressed"]
+[connection signal="pressed" from="VBoxContainer/RotateTopAnti" to="." method="_on_rotate_top_anti_pressed"]
+[connection signal="pressed" from="VBoxContainer/RotateFront" to="." method="_on_rotate_front_pressed"]
+[connection signal="pressed" from="VBoxContainer/RotateFrontAnti" to="." method="_on_rotate_front_anti_pressed"]
+[connection signal="pressed" from="VBoxContainer/RotateSide" to="." method="_on_rotate_side_pressed"]
+[connection signal="pressed" from="VBoxContainer/RotateSideAnti" to="." method="_on_rotate_side_anti_pressed"]

@@ -42,6 +42,7 @@ offset_top = 26.0
 offset_right = 535.0
 offset_bottom = 526.0
 scale = Vector2(0.25, 0.25)
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_rbxm1")
 
@@ -61,6 +62,7 @@ alignment = 2
 
 [node name="UndoButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("3_0uiml")
 texture_pressed = ExtResource("4_gmpdy")
@@ -68,6 +70,7 @@ stretch_mode = 0
 
 [node name="RedoButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_45vm1")
 texture_pressed = ExtResource("6_6qnik")
@@ -75,6 +78,7 @@ stretch_mode = 0
 
 [node name="TutorialButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("7_okjy1")
 texture_pressed = ExtResource("3_tvowq")
@@ -82,6 +86,7 @@ stretch_mode = 0
 
 [node name="SettingButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_1bn56")
 texture_pressed = ExtResource("10_v3hm1")

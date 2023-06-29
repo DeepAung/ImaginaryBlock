@@ -1,23 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3edutnadp4dl"]
+[gd_scene load_steps=6 format=3 uid="uid://d3edutnadp4dl"]
 
 [ext_resource type="Script" path="res://src/world.gd" id="1_jbyb0"]
 [ext_resource type="PackedScene" uid="uid://c6u4p1jm8iypv" path="res://src/menus/main_menu.tscn" id="2_3cb18"]
-[ext_resource type="Script" path="res://src/drag_select.gd" id="4_hx6tl"]
+[ext_resource type="Script" path="res://src/select_area.gd" id="3_ejfpo"]
+[ext_resource type="PackedScene" uid="uid://dlxftuh6lo32m" path="res://src/menus/tutorial_menu.tscn" id="5_56e48"]
+[ext_resource type="PackedScene" uid="uid://dpqyxvqedxk8t" path="res://src/menus/right_click_menu.tscn" id="5_w86j3"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_jbyb0")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_3cb18")]
 
-[node name="CubesContainer" type="Node2D" parent="." groups=["cubes_container"]]
+[node name="SelectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_ejfpo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectArea"]
+
+[node name="CubeLayer" type="CanvasLayer" parent="."]
+
+[node name="CubesContainer" type="Node2D" parent="CubeLayer" groups=["cubes_container"]]
 z_index = 1
 y_sort_enabled = true
 
-[node name="DragSelect" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("4_hx6tl")
+[node name="TopLayer" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DragSelect"]
+[node name="RightClickMenu" parent="TopLayer" instance=ExtResource("5_w86j3")]
+visible = false
 
-[connection signal="area_entered" from="DragSelect" to="DragSelect" method="_on_area_entered"]
+[node name="TutorialMenu" parent="TopLayer" instance=ExtResource("5_56e48")]
+
+[connection signal="area_entered" from="SelectArea" to="SelectArea" method="_on_area_entered"]

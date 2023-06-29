@@ -8,6 +8,7 @@
 offset_right = 500.0
 offset_bottom = 500.0
 scale = Vector2(0.25, 0.25)
+focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1_bf7m2")
 texture_click_mask = ExtResource("2_6teg4")

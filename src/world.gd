@@ -2,6 +2,8 @@ extends Node
 
 
 var cube_scene = preload("res://src/cube/cube.tscn")
+@onready var cubes_container: Node2D = $CubeLayer/CubesContainer
+
 
 var dragging: bool = false
 var is_dragged: bool = false
@@ -13,7 +15,7 @@ func _ready() -> void:
 	pre_mouse_pos = get_viewport().get_mouse_position()
 	cur_mouse_pos = get_viewport().get_mouse_position()
 	
-	sort_cubes_handler()
+	_sort_cubes_handler()
 	
 	EventBus.cube_clicked.connect(_on_cube_clicked)
 
@@ -32,11 +34,6 @@ func _input(event: InputEvent) -> void:
 		is_dragged = false
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("left_click"):
-		SelectManager.clear_selected_cubes()
-
-
 func _physics_process(delta: float) -> void:
 	pre_mouse_pos = cur_mouse_pos
 	cur_mouse_pos = get_viewport().get_mouse_position()
@@ -51,12 +48,12 @@ func _physics_process(delta: float) -> void:
 		is_dragged = true
 		EventBus.is_dragged_started.emit()
 	
-	move_handler(delta)
-	snap_handler(delta)
-	sort_cubes_handler()
+	_move_handler(delta)
+	_snap_handler(delta)
+	_sort_cubes_handler()
 
 
-func move_handler(delta: float):
+func _move_handler(delta: float):
 	for i in range(len(SelectManager.selected_cubes)):
 		var cube = SelectManager.selected_cubes[i]
 		var cube_offset = SelectManager.cubes_offset[i]
@@ -68,18 +65,31 @@ func move_handler(delta: float):
 		)
 
 
-func snap_handler(delta: float):
-	var result = get_best_snap()
+func _snap_handler(delta: float):
+	var result = _get_best_snap()
 	if result == null: return
 	
-	var snap_offset = result[1]
-	var new_z_index = result[2]
+	_update_snap(result.snap_offset, result.new_z_index)
+
+
+func _sort_cubes_handler():
+	var cubes = cubes_container.get_children() as Array[Cube]
 	
-	update_snap(snap_offset, new_z_index)
+	cubes.sort_custom(func (a: Cube, b: Cube):
+		if a.z_index != b.z_index:
+			return a.z_index < b.z_index
+		return a.position.y < b.position.y
+	)
+	
+	for i in range(len(cubes)):
+		cubes_container.move_child(cubes[i], i)
 
 
-func get_best_snap():
-	var best_result = []
+# ----- helper functions ---------------------------- #
+
+
+func _get_best_snap() -> Cube.SnapResult:
+	var best_result: Array[Cube.SnapResult] = []
 	for cube in SelectManager.selected_cubes:
 		var result = cube.get_snap()
 		if result == null: continue
@@ -91,7 +101,7 @@ func get_best_snap():
 	return best_result[0]
 
 
-func update_snap(snap_offset: Vector2, new_z_index: int):
+func _update_snap(snap_offset: Vector2, new_z_index: int):
 	# find min z-index
 	var min_z_index: int = SelectManager.selected_cubes[0].z_index
 	for i in range(1, len(SelectManager.selected_cubes)):
@@ -104,16 +114,3 @@ func update_snap(snap_offset: Vector2, new_z_index: int):
 	for cube in SelectManager.selected_cubes:
 		cube.global_position += snap_offset
 		cube.z_index += delta_z_index
-
-
-func sort_cubes_handler():
-	var cubes = $CubesContainer.get_children() as Array[Cube]
-	
-	cubes.sort_custom(func (a: Cube, b: Cube):
-		if a.z_index != b.z_index:
-			return a.z_index < b.z_index
-		return a.position.y < b.position.y
-	)
-	
-	for i in range(len(cubes)):
-		$CubesContainer.move_child(cubes[i], i)

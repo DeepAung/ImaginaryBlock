@@ -1,0 +1,4 @@
+class_name Enum
+
+
+enum { BACK_LEFT, BACK_RIGHT, FRONT_LEFT, FRONT_RIGHT, ABOVE, UNDER, SAME }

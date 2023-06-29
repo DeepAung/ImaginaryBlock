@@ -6,7 +6,7 @@ var drag_start: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	EventBus.cube_clicked.connect(clear_drag_select)
+	EventBus.cube_clicked.connect(clear_select_area)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -41,7 +41,7 @@ func select_intersect_cubes():
 	$CollisionShape2D.position = (drag_start + drag_end) / 2
 
 
-func clear_drag_select():
+func clear_select_area():
 	$CollisionShape2D.shape = null
 	$CollisionShape2D.position = Vector2.ZERO
 

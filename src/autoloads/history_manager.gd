@@ -24,6 +24,13 @@ func _ready() -> void:
 	)
 
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_redo"):
+		redo_history()
+	elif Input.is_action_just_pressed("ui_undo"):
+		undo_history()
+
+
 func save_history():	
 	var cubes = get_tree().get_nodes_in_group("cubes")
 	var cubes_info = cubes.map( func (cube: Cube):
@@ -43,7 +50,7 @@ func undo_history():
 	
 	SelectManager.clear_selected_cubes()
 	cur_index -= 1
-	go_to_history()
+	_go_to_history()
 
 
 func redo_history():
@@ -51,10 +58,10 @@ func redo_history():
 	
 	SelectManager.clear_selected_cubes()
 	cur_index += 1
-	go_to_history()
+	_go_to_history()
 
 
-func go_to_history():
+func _go_to_history():
 	var cubes = get_tree().get_nodes_in_group("cubes") as Array[Cube]
 	var cubes_container = get_tree().get_first_node_in_group("cubes_container")
 	
