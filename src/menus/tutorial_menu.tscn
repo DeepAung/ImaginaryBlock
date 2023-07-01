@@ -14,6 +14,7 @@
 
 [sub_resource type="SystemFont" id="SystemFont_kgkbg"]
 font_names = PackedStringArray("Bungee")
+subpixel_positioning = 0
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_no8kt"]
 frames = 2

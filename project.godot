@@ -17,11 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SelectManager="*res://src/autoloads/select_manager.gd"
 EventBus="*res://src/autoloads/event_bus.gd"
+SelectManager="*res://src/autoloads/select_manager.gd"
 HistoryManager="*res://src/autoloads/history_manager.gd"
 RotateManager="*res://src/autoloads/rotate_manager.gd"
-InputManager="*res://src/autoloads/input_manager.gd"
 
 [display]
 

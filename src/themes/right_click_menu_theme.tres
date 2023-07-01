@@ -1,13 +1,18 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://ed74we2i2l5j"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ed74we2i2l5j"]
 
 [sub_resource type="SystemFont" id="SystemFont_adw1i"]
 font_names = PackedStringArray("Bungee")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rl18x"]
-bg_color = Color(0.152941, 0.215686, 0.301961, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eakbb"]
+bg_color = Color(0.254902, 0.352941, 0.501961, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pocli"]
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 24
+Button/font_sizes/font_size = 16
 Button/fonts/font = SubResource("SystemFont_adw1i")
-Button/styles/normal = SubResource("StyleBoxFlat_rl18x")
+Button/styles/focus = SubResource("StyleBoxFlat_eakbb")
+Button/styles/hover = SubResource("StyleBoxFlat_eakbb")
+Button/styles/normal = SubResource("StyleBoxEmpty_pocli")
+Button/styles/pressed = SubResource("StyleBoxFlat_eakbb")

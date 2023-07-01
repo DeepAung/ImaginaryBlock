@@ -13,11 +13,18 @@ var cube_scene = preload("res://src/cube/cube.tscn")
 func _ready() -> void:
 	EventBus.dragging_started.connect(_set_cubes_offset)
 	EventBus.dragging_ended.connect(_clear_cubes_offset)
-
+	
+	EventBus.is_dragged_started.connect(func():
+		if Input.is_action_pressed("alt"):
+			duplicate_selected_cubes()
+	)
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ctrl_a"):
 		add_all_selected_cubes()
+	if Input.is_action_just_pressed("delete"):
+		delete_selected_cubes()
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -68,3 +75,20 @@ func _set_cubes_offset():
 
 func _clear_cubes_offset():
 	cubes_offset = []
+
+
+func delete_selected_cubes():
+	for cube in SelectManager.selected_cubes:
+		cube.queue_free()
+	SelectManager.clear_selected_cubes()
+	EventBus.cubes_deleted.emit()
+
+
+func duplicate_selected_cubes():
+	var cubes_container = get_tree().get_first_node_in_group("cubes_container")
+	
+	for cube in SelectManager.selected_cubes:
+		var new_cube = cube_scene.instantiate() as Cube
+		new_cube.global_position = cube.global_position
+		new_cube.z_index = cube.z_index
+		cubes_container.add_child(new_cube)

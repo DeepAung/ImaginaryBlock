@@ -19,9 +19,8 @@ var cube_scene = preload("res://src/cube/cube.tscn")
 func _ready() -> void:
 	save_history()
 	
-	EventBus.dragging_ended.connect(func(is_dragged: bool):
-		if is_dragged: save_history()
-	)
+	EventBus.cubes_moved.connect(save_history)
+	EventBus.cubes_deleted.connect(save_history)
 
 
 func _input(event: InputEvent) -> void:

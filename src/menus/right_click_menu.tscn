@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpqyxvqedxk8t"]
+[gd_scene load_steps=11 format=3 uid="uid://dpqyxvqedxk8t"]
 
 [ext_resource type="Script" path="res://src/menus/right_click_menu.gd" id="1_8tp7w"]
 [ext_resource type="Theme" uid="uid://ed74we2i2l5j" path="res://src/themes/right_click_menu_theme.tres" id="1_35u0u"]
+[ext_resource type="Texture2D" uid="uid://cts4a3p4gw6bw" path="res://assets/sprites/icons/top.png" id="3_ymxey"]
+[ext_resource type="Texture2D" uid="uid://bhix5git4du1k" path="res://assets/sprites/icons/top-anti.png" id="4_bqx82"]
+[ext_resource type="Texture2D" uid="uid://1ihbdlhhjs2f" path="res://assets/sprites/icons/front.png" id="5_st0yc"]
+[ext_resource type="Texture2D" uid="uid://ldekjtynvr41" path="res://assets/sprites/icons/front-anti.png" id="6_lh4ui"]
+[ext_resource type="Texture2D" uid="uid://bvprbajpevkts" path="res://assets/sprites/icons/side.png" id="7_rxefn"]
+[ext_resource type="Texture2D" uid="uid://bwfqpboct2xhu" path="res://assets/sprites/icons/side-anti.png" id="8_1b35q"]
+[ext_resource type="Texture2D" uid="uid://c57itkkohsa37" path="res://assets/sprites/icons/delete.png" id="9_rb4mt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wckbh"]
+bg_color = Color(0.152941, 0.215686, 0.301961, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="RightClickMenu" type="Control"]
 layout_mode = 3
@@ -12,56 +26,102 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8tp7w")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 440.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wckbh")
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1520.0
-offset_bottom = -720.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
 
-[node name="RotateTop" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RotateTop" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = ExtResource("1_35u0u")
-text = "rotate top axis"
+text = "     rotate top axis"
+icon = ExtResource("3_ymxey")
+alignment = 0
+clip_text = true
+expand_icon = true
 
-[node name="RotateTopAnti" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+[node name="RotateTopAnti" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = ExtResource("1_35u0u")
-text = "rotate top axis (anti)"
+text = "     rotate top axis (anti)"
+icon = ExtResource("4_bqx82")
+alignment = 0
+clip_text = true
+expand_icon = true
 
-[node name="RotateFront" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+[node name="RotateFront" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = ExtResource("1_35u0u")
-text = "rotate front axis"
+text = "     rotate front axis"
+icon = ExtResource("5_st0yc")
+alignment = 0
+clip_text = true
+expand_icon = true
 
-[node name="RotateFrontAnti" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+[node name="RotateFrontAnti" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = ExtResource("1_35u0u")
-text = "rotate front axis (anti)"
+text = "     rotate front axis (anti)"
+icon = ExtResource("6_lh4ui")
+alignment = 0
+clip_text = true
+expand_icon = true
 
-[node name="RotateSide" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+[node name="RotateSide" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = ExtResource("1_35u0u")
-text = "rotate side axis"
+text = "     rotate side axis"
+icon = ExtResource("7_rxefn")
+alignment = 0
+clip_text = true
+expand_icon = true
 
-[node name="RotateSideAnti" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+[node name="RotateSideAnti" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = ExtResource("1_35u0u")
-text = "rotate side axis (anti)"
+text = "     rotate side axis (anti)"
+icon = ExtResource("8_1b35q")
+alignment = 0
+clip_text = true
+expand_icon = true
 
-[connection signal="pressed" from="VBoxContainer/RotateTop" to="." method="_on_rotate_top_pressed"]
-[connection signal="pressed" from="VBoxContainer/RotateTopAnti" to="." method="_on_rotate_top_anti_pressed"]
-[connection signal="pressed" from="VBoxContainer/RotateFront" to="." method="_on_rotate_front_pressed"]
-[connection signal="pressed" from="VBoxContainer/RotateFrontAnti" to="." method="_on_rotate_front_anti_pressed"]
-[connection signal="pressed" from="VBoxContainer/RotateSide" to="." method="_on_rotate_side_pressed"]
-[connection signal="pressed" from="VBoxContainer/RotateSideAnti" to="." method="_on_rotate_side_anti_pressed"]
+[node name="Delete" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_35u0u")
+text = "     Delete"
+icon = ExtResource("9_rb4mt")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateTop" to="." method="_on_rotate_top_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateTopAnti" to="." method="_on_rotate_top_anti_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateFront" to="." method="_on_rotate_front_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateFrontAnti" to="." method="_on_rotate_front_anti_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateSide" to="." method="_on_rotate_side_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateSideAnti" to="." method="_on_rotate_side_anti_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Delete" to="." method="_on_delete_pressed"]

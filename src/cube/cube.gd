@@ -36,6 +36,9 @@ const SNAP_RANGE = 20.0
 @onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 
 
+# ---------------------------------------- #
+
+
 static func get_reversed_join_dir(join_dir: JOIN_DIR) -> JOIN_DIR:
 	match join_dir:
 		JOIN_DIR.BACK_LEFT: return JOIN_DIR.FRONT_RIGHT
