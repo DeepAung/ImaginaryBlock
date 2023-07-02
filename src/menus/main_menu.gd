@@ -1,12 +1,20 @@
 extends Control
 
 
+@onready var color_rect: ColorRect = $ColorRect
+
 @onready var cube_create_button: TextureButton = $CubeCreateButton
 @onready var cubes_container: Node2D = $"../CubeLayer/CubesContainer"
 @onready var tutorial_menu: Control = $"../TopLayer/TutorialMenu"
+@onready var setting_menu: Control = $"../TopLayer/SettingMenu"
 
 
 var cube_scene = preload("res://src/cube/cube.tscn")
+
+
+func _process(delta: float) -> void:
+	color_rect.color = Setting.background_color
+
 
 func _on_cube_create_button_button_down() -> void:
 	var cube: Cube = cube_scene.instantiate()
@@ -19,13 +27,17 @@ func _on_cube_create_button_button_down() -> void:
 	EventBus.cube_clicked.emit()
 
 
-func _on_tutorial_button_pressed() -> void:
-	tutorial_menu.show()
-
-
 func _on_undo_button_pressed() -> void:
 	HistoryManager.undo_history()
 
 
 func _on_redo_button_pressed() -> void:
 	HistoryManager.redo_history()
+
+
+func _on_tutorial_button_pressed() -> void:
+	tutorial_menu.show()
+
+
+func _on_setting_button_pressed() -> void:
+	setting_menu.show()

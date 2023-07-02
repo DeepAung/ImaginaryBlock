@@ -1,16 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://chgydpx4u3ci2"]
 
 [ext_resource type="Script" path="res://src/cube/cube.gd" id="1_7081j"]
-[ext_resource type="Texture2D" uid="uid://48gf3tli12ej" path="res://assets/sprites/cube/cube.png" id="1_bf7m2"]
+[ext_resource type="Texture2D" uid="uid://c2210pmh0ep7o" path="res://assets/sprites/cube/cube.png" id="1_slsp3"]
 [ext_resource type="BitMap" uid="uid://cpuq14up073vq" path="res://assets/sprites/cube/cube-mask.png" id="2_6teg4"]
 
 [node name="TextureButton" type="TextureButton" groups=["cubes"]]
 offset_right = 500.0
 offset_bottom = 500.0
 scale = Vector2(0.25, 0.25)
+size_flags_horizontal = 0
+size_flags_vertical = 0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("1_bf7m2")
 texture_click_mask = ExtResource("2_6teg4")
 script = ExtResource("1_7081j")
 
@@ -21,5 +22,30 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_slsp3")
+offset = Vector2(0.15625, 34.05)
+
+[node name="Sprite" type="Node" parent="Area2D"]
+
+[node name="Top" type="Polygon2D" parent="Area2D/Sprite"]
+visible = false
+color = Color(0.866667, 0.901961, 0.929412, 1)
+polygon = PackedVector2Array(62.5, 54.0703, 122.398, 27.875, 62.5156, 1.89063, 2.60938, 27.8594)
+
+[node name="Front" type="Polygon2D" parent="Area2D/Sprite"]
+visible = false
+color = Color(0.601289, 0.697347, 0.770753, 1)
+polygon = PackedVector2Array(2.60938, 27.8594, 62.5156, 54.0703, 62.5547, 123.406, 2.57031, 97.1016)
+
+[node name="Side" type="Polygon2D" parent="Area2D/Sprite"]
+visible = false
+color = Color(0.390522, 0.491165, 0.567049, 1)
+polygon = PackedVector2Array(62.5, 54.0703, 122.391, 27.8828, 122.422, 97.1016, 62.5547, 123.414)
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

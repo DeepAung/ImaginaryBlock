@@ -10,5 +10,4 @@ signal is_dragged_started
 signal dragging_started
 signal dragging_ended
 
-signal cubes_moved
-signal cubes_deleted
+signal cubes_changed

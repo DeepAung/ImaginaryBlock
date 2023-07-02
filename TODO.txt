@@ -1,0 +1,6 @@
+- add SFX
+- add settings menu (each of setting can set back to default value)
+  - cubes outline (px)
+  - cubes color
+  - background color
+  - sound effects (volumn)

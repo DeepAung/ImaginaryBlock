@@ -18,14 +18,11 @@ func rotate_cubes(axis: AXIS, rotate_dir: ROTATE_DIR):
 	
 	var past_center_pos = _get_center_pos()
 	
-	# create cubes graph
 	_create_graph_handler()
-	
-	# do the rotate things
 	_rotate_handler()
-	
-	# just reposition
 	_reposition_handler(past_center_pos)
+	
+	EventBus.cubes_changed.emit()
 
 
 func _create_graph_handler():

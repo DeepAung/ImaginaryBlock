@@ -31,7 +31,7 @@ func _input(event: InputEvent) -> void:
 	if dragging and Input.is_action_just_released("left_click"):
 		EventBus.dragging_ended.emit()
 		if is_dragged:
-			EventBus.cubes_moved.emit()
+			EventBus.cubes_changed.emit()
 		
 		dragging = false
 		is_dragged = false

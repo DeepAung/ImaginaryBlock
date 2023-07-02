@@ -96,3 +96,4 @@ stretch_mode = 0
 [connection signal="pressed" from="HBoxContainer/UndoButton" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/RedoButton" to="." method="_on_redo_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/SettingButton" to="." method="_on_setting_button_pressed"]

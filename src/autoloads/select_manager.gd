@@ -81,7 +81,7 @@ func delete_selected_cubes():
 	for cube in SelectManager.selected_cubes:
 		cube.queue_free()
 	SelectManager.clear_selected_cubes()
-	EventBus.cubes_deleted.emit()
+	EventBus.cubes_changed.emit()
 
 
 func duplicate_selected_cubes():

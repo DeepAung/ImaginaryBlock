@@ -34,6 +34,18 @@ const SNAP_RANGE = 20.0
 
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
+@onready var polygon_2d: Polygon2D = $Area2D/Polygon2D
+
+
+func _process(delta: float) -> void:
+	if polygon_2d == null: return
+	
+	var cube_scale = (Setting.cube_border + 100) / 100
+	
+	if cube_scale == 1: polygon_2d.hide()
+	else: polygon_2d.show()
+	
+	polygon_2d.scale = Vector2(cube_scale, cube_scale)
 
 
 # ---------------------------------------- #

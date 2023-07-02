@@ -9,10 +9,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("right_click") and (not tutorial_menu.visible):
+	if Input.is_action_just_released("right_click") and (not tutorial_menu.visible):
 		show()
 		assign_position()
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_released("left_click"):
 		hide()
 
 

@@ -1,0 +1,261 @@
+[gd_scene load_steps=10 format=3 uid="uid://cwoeqe3vq3lks"]
+
+[ext_resource type="Script" path="res://src/menus/setting_menu.gd" id="1_ytqv2"]
+[ext_resource type="Texture2D" uid="uid://devxholhxj4rf" path="res://assets/sprites/buttons/back.png" id="2_vj35i"]
+[ext_resource type="Texture2D" uid="uid://bxatnb3tpfu51" path="res://assets/sprites/buttons/back-click.png" id="3_3d3ae"]
+[ext_resource type="Theme" uid="uid://6t3pwtx2223v" path="res://src/themes/setting_theme.tres" id="3_d1vq0"]
+[ext_resource type="BitMap" uid="uid://cpuq14up073vq" path="res://assets/sprites/cube/cube-mask.png" id="6_mwmtg"]
+[ext_resource type="Script" path="res://src/cube/cube.gd" id="7_4teyn"]
+[ext_resource type="Texture2D" uid="uid://c2210pmh0ep7o" path="res://assets/sprites/cube/cube.png" id="8_1j6o6"]
+
+[sub_resource type="SystemFont" id="SystemFont_kgkbg"]
+font_names = PackedStringArray("Bungee")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5spjp"]
+bg_color = Color(0.152941, 0.215686, 0.301961, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="SettingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_d1vq0")
+script = ExtResource("1_ytqv2")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+
+[node name="Title" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 39.0
+offset_bottom = 141.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_colors/font_outline_color = Color(0.152941, 0.215686, 0.301961, 1)
+theme_override_fonts/font = SubResource("SystemFont_kgkbg")
+theme_override_font_sizes/font_size = 72
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="Background"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 36.0
+offset_right = 585.0
+offset_bottom = 536.0
+scale = Vector2(0.217933, 0.217933)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_vj35i")
+texture_pressed = ExtResource("3_3d3ae")
+
+[node name="CubeBorder" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 333.0
+offset_top = 165.0
+offset_right = -333.0
+offset_bottom = -717.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CubeBorder"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 81.0
+offset_right = 398.0
+offset_bottom = 127.0
+text = "Cube Border"
+vertical_alignment = 1
+
+[node name="CubeBorderSlider" type="HSlider" parent="CubeBorder"]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 63.0
+offset_right = 828.0
+offset_bottom = 89.0
+scale = Vector2(3, 3)
+
+[node name="CubeBorderReset" type="Button" parent="CubeBorder"]
+layout_mode = 0
+offset_left = 437.0
+offset_top = 76.0
+offset_right = 554.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 24
+text = "RESET"
+
+[node name="CubeColor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 197.0
+offset_top = 381.0
+offset_right = -1168.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CubeColor"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 32.0
+offset_right = 339.0
+offset_bottom = 78.0
+text = "Cube Color"
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="CubeColor"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 111.0
+offset_right = 622.0
+offset_bottom = 811.0
+scale = Vector2(0.8, 0.8)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5spjp")
+
+[node name="CenterContainer" type="CenterContainer" parent="CubeColor/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CubeColorPicker" type="ColorPicker" parent="CubeColor/Panel/CenterContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="CubeColorReset" type="Button" parent="CubeColor"]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 23.0
+offset_right = 492.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 24
+text = "RESET"
+
+[node name="BackgroundColor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1151.0
+offset_top = 381.0
+offset_right = -214.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackgroundColor"]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 32.0
+offset_right = 431.0
+offset_bottom = 78.0
+text = "Background Color"
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="BackgroundColor"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 111.0
+offset_right = 622.0
+offset_bottom = 811.0
+scale = Vector2(0.8, 0.8)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5spjp")
+
+[node name="CenterContainer" type="CenterContainer" parent="BackgroundColor/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundColorPicker" type="ColorPicker" parent="BackgroundColor/Panel/CenterContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="BackgroundColorReset" type="Button" parent="BackgroundColor"]
+layout_mode = 0
+offset_left = 469.0
+offset_top = 23.0
+offset_right = 586.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 24
+text = "RESET"
+
+[node name="Show" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 819.0
+offset_top = 510.0
+offset_right = -819.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundColorRect" type="ColorRect" parent="Show"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 290.0
+offset_right = 230.0
+offset_bottom = 442.0
+
+[node name="Cube" type="TextureButton" parent="Show"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 62.0
+offset_right = 584.0
+offset_bottom = 562.0
+scale = Vector2(0.25, 0.25)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_click_mask = ExtResource("6_mwmtg")
+script = ExtResource("7_4teyn")
+
+[node name="Area2D" type="Area2D" parent="Show/Cube"]
+position = Vector2(250, 216.3)
+collision_layer = 0
+collision_mask = 0
+input_pickable = false
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Show/Cube/Area2D"]
+polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+
+[node name="Polygon2D" type="Polygon2D" parent="Show/Cube/Area2D"]
+scale = Vector2(1.02, 1.02)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+
+[node name="Sprite2D" type="Sprite2D" parent="Show/Cube/Area2D"]
+texture = ExtResource("8_1j6o6")
+offset = Vector2(0.15625, 34.05)
+
+[connection signal="pressed" from="Background/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CubeBorder/CubeBorderReset" to="." method="_on_cube_border_reset_pressed"]
+[connection signal="pressed" from="CubeColor/CubeColorReset" to="." method="_on_cube_color_reset_pressed"]
+[connection signal="pressed" from="BackgroundColor/BackgroundColorReset" to="." method="_on_background_color_reset_pressed"]
