@@ -1,8 +1,6 @@
 extends Control
 
 
-@onready var color_rect: ColorRect = $ColorRect
-
 @onready var cube_create_button: TextureButton = $CubeCreateButton
 @onready var cubes_container: Node2D = $"../CubeLayer/CubesContainer"
 @onready var tutorial_menu: Control = $"../TopLayer/TutorialMenu"
@@ -10,10 +8,6 @@ extends Control
 
 
 var cube_scene = preload("res://src/cube/cube.tscn")
-
-
-func _process(delta: float) -> void:
-	color_rect.color = Setting.background_color
 
 
 func _on_cube_create_button_button_down() -> void:
