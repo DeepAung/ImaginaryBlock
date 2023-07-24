@@ -73,7 +73,8 @@ offset_top = -293.0
 offset_right = 828.0
 offset_bottom = -267.0
 scale = Vector2(3, 3)
-max_value = 50.0
+max_value = 150.0
+step = 10.0
 
 [node name="CubeBorderReset" type="Button" parent="Background/CubeBorder"]
 layout_mode = 0
@@ -115,10 +116,10 @@ monitoring = false
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Cube/Area2D"]
 polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
 
-[node name="Polygon2D" type="Polygon2D" parent="Background/Cube/Area2D"]
-scale = Vector2(1.02, 1.02)
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+[node name="Line2D" type="Line2D" parent="Background/Cube/Area2D"]
+points = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831, 0, -208.706, 239.562, -104.831)
+width = 0.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Cube/Area2D"]
 texture = ExtResource("8_1j6o6")

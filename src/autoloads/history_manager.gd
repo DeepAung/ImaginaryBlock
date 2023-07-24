@@ -23,6 +23,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if Setting.is_menu_open(): return
+	
 	if Input.is_action_just_pressed("ui_redo"):
 		redo_history()
 	elif Input.is_action_just_pressed("ui_undo"):

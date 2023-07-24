@@ -28,100 +28,73 @@ script = ExtResource("1_8tp7w")
 
 [node name="ColorRect" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 380.0
-offset_bottom = 440.0
+offset_right = 300.0
+offset_bottom = 300.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wckbh")
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1700.0
+offset_bottom = 1700.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
+scale = Vector2(0.15, 0.15)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="ColorRect/CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 100
+columns = 3
 
-[node name="RotateTop" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RotateTop" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     rotate top axis"
-icon = ExtResource("3_ymxey")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("3_ymxey")
 
-[node name="RotateTopAnti" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RotateFront" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     rotate top axis (anti)"
-icon = ExtResource("4_bqx82")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("5_st0yc")
 
-[node name="RotateFront" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RotateSide" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     rotate front axis"
-icon = ExtResource("5_st0yc")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("7_rxefn")
 
-[node name="RotateFrontAnti" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RotateTopAnti" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     rotate front axis (anti)"
-icon = ExtResource("6_lh4ui")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("4_bqx82")
 
-[node name="RotateSide" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RotateFrontAnti" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     rotate side axis"
-icon = ExtResource("7_rxefn")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("6_lh4ui")
 
-[node name="RotateSideAnti" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RotateSideAnti" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     rotate side axis (anti)"
-icon = ExtResource("8_1b35q")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("8_1b35q")
 
-[node name="Delete" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="Delete" type="TextureButton" parent="ColorRect/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_35u0u")
-text = "     Delete"
-icon = ExtResource("9_rb4mt")
-alignment = 0
-clip_text = true
-expand_icon = true
+texture_normal = ExtResource("9_rb4mt")
 
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateTop" to="." method="_on_rotate_top_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateTopAnti" to="." method="_on_rotate_top_anti_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateFront" to="." method="_on_rotate_front_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateFrontAnti" to="." method="_on_rotate_front_anti_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateSide" to="." method="_on_rotate_side_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RotateSideAnti" to="." method="_on_rotate_side_anti_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/RotateTop" to="." method="_on_rotate_top_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/RotateFront" to="." method="_on_rotate_front_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/RotateSide" to="." method="_on_rotate_side_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/RotateTopAnti" to="." method="_on_rotate_top_anti_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/RotateFrontAnti" to="." method="_on_rotate_front_anti_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/RotateSideAnti" to="." method="_on_rotate_side_anti_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/GridContainer/Delete" to="." method="_on_delete_pressed"]

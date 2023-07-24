@@ -31,10 +31,10 @@ layer = 2
 [node name="RightClickMenu" parent="TopLayer" instance=ExtResource("5_w86j3")]
 visible = false
 
-[node name="TutorialMenu" parent="TopLayer" instance=ExtResource("5_56e48")]
+[node name="TutorialMenu" parent="TopLayer" groups=["tutorial_menu"] instance=ExtResource("5_56e48")]
 visible = false
 
-[node name="SettingMenu" parent="TopLayer" instance=ExtResource("6_naw7m")]
+[node name="SettingMenu" parent="TopLayer" groups=["setting_menu"] instance=ExtResource("6_naw7m")]
 visible = false
 
 [connection signal="area_entered" from="SelectArea" to="SelectArea" method="_on_area_entered"]

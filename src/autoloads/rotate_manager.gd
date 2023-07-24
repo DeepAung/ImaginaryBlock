@@ -10,6 +10,7 @@ var visited: Array[bool]
 var shifting_join_dirs: Array[int]
 
 
+# used in right click menu
 func rotate_cubes(axis: AXIS, rotate_dir: ROTATE_DIR):
 	shifting_join_dirs = _get_shifting_join_dirs(axis, rotate_dir)
 	cubes = SelectManager.selected_cubes
@@ -18,9 +19,13 @@ func rotate_cubes(axis: AXIS, rotate_dir: ROTATE_DIR):
 	
 	var past_center_pos = _get_center_pos()
 	
+	print("start creating ", cubes.size(), "cubes in graph")
 	_create_graph_handler()
+	print("created")
 	_rotate_handler()
+	print("rotated")
 	_reposition_handler(past_center_pos)
+	print("repositioned")
 	
 	EventBus.cubes_changed.emit()
 
@@ -32,8 +37,7 @@ func _create_graph_handler():
 		graph[i].resize(len(Cube.JOIN_DIR))
 		graph[i].fill(-1)
 	
-	
-	# can use dict to make the algo faster
+	# TODO: make the algo faster or change to C#/C++
 	for i in range(0, len(cubes)):
 		for j in range(i+1, len(cubes)):
 			for k in range(len(Cube.JOIN_ARRAY)):

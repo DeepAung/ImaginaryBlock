@@ -23,9 +23,17 @@ collision_mask = 2
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
 
-[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+[node name="Line2D" type="Line2D" parent="Area2D"]
+visible = false
+points = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831, 0, -208.706, 239.562, -104.831)
+width = 0.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="SelectLine2D" type="Line2D" parent="Area2D"]
+visible = false
+z_index = 100
+points = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831, 0, -208.706, 239.562, -104.831)
+default_color = Color(0.533333, 0.788235, 1, 0.392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 texture = ExtResource("1_slsp3")

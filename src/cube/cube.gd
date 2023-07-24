@@ -34,18 +34,18 @@ const SNAP_RANGE = 20.0
 
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
-@onready var polygon_2d: Polygon2D = $Area2D/Polygon2D
+@onready var line_2d: Line2D = $Area2D/Line2D
+@onready var select_line_2d: Line2D = $Area2D/SelectLine2D
 
 
 func _process(delta: float) -> void:
-	if polygon_2d == null: return
+	# wait line_2d to be ready
+	if line_2d == null: return
 	
-	var cube_scale = (Setting.cube_border + 100) / 100
+	line_2d.width = Setting.cube_border
 	
-	if cube_scale == 1: polygon_2d.hide()
-	else: polygon_2d.show()
-	
-	polygon_2d.scale = Vector2(cube_scale, cube_scale)
+	if line_2d.width == 0: line_2d.hide()
+	else: line_2d.show()
 
 
 # ---------------------------------------- #
@@ -82,7 +82,8 @@ func get_snap() -> SnapResult:
 
 	if dists.is_empty(): return null
 
-	dists.sort()
+#	dists.sort()
+	dists.sort_custom(snap_sort_compare)
 	var result = dists[0]
 	
 	var snap_offset = result[1]
@@ -128,6 +129,27 @@ func get_cube_offset(direction: DIR) -> Vector2:
 		return Vector2.ZERO
 	
 	return collision_polygon_2d.polygon[direction] * scale
+
+
+static func snap_sort_compare(a, b):
+	var min_dist_a = a[0]
+	var z_index_a = a[2]
+	var pos_a = (a[3] as Cube).global_position
+	
+	var min_dist_b = b[0]
+	var z_index_b = b[2]
+	var pos_b = (b[3] as Cube).global_position
+	
+	if abs(min_dist_b - min_dist_a) > 5:
+		return min_dist_a < min_dist_b
+	
+	if z_index_a != z_index_b:
+		return z_index_a > z_index_b
+	
+	if pos_a.y != pos_b.y:
+		return pos_a.y > pos_b.y
+	
+	return min_dist_a < min_dist_b
 
 
 # ---------------------------------------- #

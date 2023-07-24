@@ -19,15 +19,19 @@ func _ready() -> void:
 			duplicate_selected_cubes()
 	)
 
+
 func _input(event: InputEvent) -> void:
+	if Setting.is_menu_open(): return
+	
 	if Input.is_action_just_pressed("ctrl_a"):
 		add_all_selected_cubes()
 	if Input.is_action_just_pressed("delete"):
 		delete_selected_cubes()
 
 
-
 func _unhandled_input(event: InputEvent) -> void:
+	if Setting.is_menu_open(): return
+	
 	if Input.is_action_just_pressed("left_click"):
 		clear_selected_cubes()
 
@@ -36,11 +40,13 @@ func add_selected_cube(cube: Cube):
 	if is_in_selected_cubes(cube): return
 	
 	cube.modulate = SELECTED_MODULATE
+	cube.select_line_2d.show()
 	selected_cubes.push_back(cube)
 
 
 func remove_selected_cube(cube: Cube):
 	cube.modulate = UNSELECTED_MODULATE
+	cube.select_line_2d.hide()
 	selected_cubes.erase(cube)
 
 
@@ -53,10 +59,10 @@ func add_all_selected_cubes():
 		add_selected_cube(cube)
 
 
-
 func clear_selected_cubes():
 	for cube in selected_cubes:
 		cube.modulate = UNSELECTED_MODULATE
+		cube.select_line_2d.hide()
 	
 	selected_cubes = []
 

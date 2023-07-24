@@ -9,11 +9,13 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if Setting.is_menu_open(): return
+	
 	if Input.is_action_just_released("right_click") and (not tutorial_menu.visible):
-		show()
+		show_tween()
 		assign_position()
 	if Input.is_action_just_released("left_click"):
-		hide()
+		hide_tween()
 
 
 func assign_position():
@@ -27,6 +29,30 @@ func assign_position():
 		global_position.x = window_size.x - rect_size.x
 	if global_position.y + rect_size.y > window_size.y:
 		global_position.y = window_size.y - rect_size.y
+
+
+func show_tween():
+	if visible: return
+	
+	show()
+	modulate = Color.TRANSPARENT
+	
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.075)
+	tween.play()
+
+
+func hide_tween():
+	if not visible: return
+	
+	modulate = Color.WHITE
+	
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.075)
+	tween.tween_callback(hide)
+	tween.play()
 
 
 func _on_rotate_top_pressed() -> void:
