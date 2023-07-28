@@ -19,13 +19,9 @@ func rotate_cubes(axis: AXIS, rotate_dir: ROTATE_DIR):
 	
 	var past_center_pos = _get_center_pos()
 	
-	print("start creating ", cubes.size(), "cubes in graph")
 	_create_graph_handler()
-	print("created")
 	_rotate_handler()
-	print("rotated")
 	_reposition_handler(past_center_pos)
-	print("repositioned")
 	
 	EventBus.cubes_changed.emit()
 
@@ -37,17 +33,45 @@ func _create_graph_handler():
 		graph[i].resize(len(Cube.JOIN_DIR))
 		graph[i].fill(-1)
 	
-	# TODO: make the algo faster or change to C#/C++
-	for i in range(0, len(cubes)):
-		for j in range(i+1, len(cubes)):
-			for k in range(len(Cube.JOIN_ARRAY)):
-				var reversed_k = Cube.get_reversed_join_dir(k)
-				var dirs = Cube.JOIN_ARRAY[k]
-				if reversed_k == -1: printerr("reversed_k: ", reversed_k)
+	var cubes_pos = []
+	for i in range(len(cubes)):
+		cubes_pos.push_back([cubes[i].position, i])
+	
+	cubes_pos.sort()
+	
+	for u in range(0, len(cubes)):
+		for u_join_dir in range(len(Cube.JOIN_ARRAY)):
+			var v_join_dir = Cube.get_reversed_join_dir(u_join_dir)
+			var dirs = Cube.JOIN_ARRAY[u_join_dir]
 
-				if _is_snap(i, dirs[0], j, dirs[1]):
-					graph[i][k] = j
-					graph[j][reversed_k] = i
+			# from: pos_a + offset_a == pos_b + offset_b
+			# to:   pos_a + offset_a - offset_b == pos_b
+			var target_pos = cubes[u].get_pos_offset(dirs[0]) - cubes[u].get_cube_offset(dirs[1])
+			
+			var start = lower_bound(cubes_pos, target_pos.x - 0.1)
+			var end = upper_bound(cubes_pos, target_pos.x + 0.1)
+			
+			for idx in range(start, end):
+				var v = cubes_pos[idx][1]
+				
+				if u == v: continue
+				if not _is_snap(u, dirs[0], v, dirs[1]): continue
+				
+				graph[u][u_join_dir] = v
+				graph[v][v_join_dir] = u
+				break
+
+	# Old algo
+#	for i in range(0, len(cubes)):
+#		for j in range(i+1, len(cubes)):
+#			for k in range(len(Cube.JOIN_ARRAY)):
+#				var reversed_k = Cube.get_reversed_join_dir(k)
+#				var dirs = Cube.JOIN_ARRAY[k]
+#				if reversed_k == -1: printerr("reversed_k: ", reversed_k)
+#
+#				if _is_snap(i, dirs[0], j, dirs[1]):
+#					graph[i][k] = j
+#					graph[j][reversed_k] = i
 
 
 func _rotate_handler():
@@ -68,6 +92,34 @@ func _reposition_handler(past_center_pos: Vector2):
 
 
 # ----- helper functions ---------------------------- #
+
+
+# find result that >= value
+func lower_bound(array: Array, value):
+	var l = 0; var r = len(array) - 1
+	
+	while l < r:
+		var mid = int((l + r) / 2)
+		if array[mid][0].x < value:
+			l = mid + 1
+		else:
+			r = mid
+	
+	return l
+
+
+# find result that > value
+func upper_bound(array: Array, value):
+	var l = 0; var r = len(array) - 1
+	
+	while l < r:
+		var mid = int((l + r) / 2)
+		if array[mid][0].x > value:
+			r = mid
+		else:
+			l = mid + 1
+	
+	return l
 
 
 func _get_center_pos() -> Vector2:
@@ -130,9 +182,9 @@ func _get_shifting_join_dirs(axis: AXIS, rotate_dir: ROTATE_DIR) -> Array[int]:
 	return result
 
 
-func _is_snap(u: int, dir_u: int, v: int, dir_v: int) -> bool:
-	var u_pos = cubes[u].get_pos_offset(dir_u)
-	var v_pos = cubes[v].get_pos_offset(dir_v)
+func _is_snap(u: int, u_dir: int, v: int, v_dir: int) -> bool:
+	var u_pos = cubes[u].get_pos_offset(u_dir)
+	var v_pos = cubes[v].get_pos_offset(v_dir)
 	
 	return u_pos.distance_to(v_pos) < 0.01
 

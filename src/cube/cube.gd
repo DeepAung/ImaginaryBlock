@@ -18,7 +18,7 @@ class SnapResult:
 
 
 enum DIR { TOP, TOP_RIGHT, BOTTOM_RIGHT, BOTTOM, BOTTOM_LEFT, TOP_LEFT, CENTER, }
-enum JOIN_DIR { BACK_LEFT, BACK_RIGHT, FRONT_LEFT, FRONT_RIGHT, ABOVE, UNDER, SAME }
+enum JOIN_DIR { BACK_LEFT, BACK_RIGHT, FRONT_LEFT, FRONT_RIGHT, ABOVE, UNDER }
 
 const JOIN_ARRAY = [
 	[DIR.CENTER,    DIR.TOP_LEFT],  # BACK_LEFT
@@ -27,7 +27,6 @@ const JOIN_ARRAY = [
 	[DIR.TOP_LEFT,  DIR.CENTER],    # FRONT_RIGHT
 	[DIR.BOTTOM,    DIR.CENTER],    # ABOVE
 	[DIR.CENTER,    DIR.BOTTOM],    # UNDER
-	[DIR.CENTER,    DIR.CENTER],    # SAME
 ]
 
 const SNAP_RANGE = 20.0
@@ -36,6 +35,8 @@ const SNAP_RANGE = 20.0
 @onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 @onready var line_2d: Line2D = $Area2D/Line2D
 @onready var select_line_2d: Line2D = $Area2D/SelectLine2D
+
+@onready var for_show: bool = self.is_in_group("show_cube")
 
 
 func _process(delta: float) -> void:
@@ -59,8 +60,7 @@ static func get_reversed_join_dir(join_dir: JOIN_DIR) -> JOIN_DIR:
 		JOIN_DIR.FRONT_RIGHT: return JOIN_DIR.BACK_LEFT
 		JOIN_DIR.ABOVE: return JOIN_DIR.UNDER
 		JOIN_DIR.UNDER: return JOIN_DIR.ABOVE
-		JOIN_DIR.SAME: return JOIN_DIR.SAME
-		_: return JOIN_DIR.SAME
+		_: return -1 # impossible case
 
 
 # ---------------------------------------- #
@@ -72,7 +72,9 @@ func get_snap() -> SnapResult:
 
 	for area in areas:
 		var other_cube = area.get_parent() as Cube
+		
 		if SelectManager.is_in_selected_cubes(other_cube): continue
+		# TODO: if not has above front-left, front-right: continue
 		
 		var result = get_snap_to(other_cube)
 		var snap_dist = result[0]
@@ -82,7 +84,6 @@ func get_snap() -> SnapResult:
 
 	if dists.is_empty(): return null
 
-#	dists.sort()
 	dists.sort_custom(snap_sort_compare)
 	var result = dists[0]
 	
@@ -156,6 +157,8 @@ static func snap_sort_compare(a, b):
 
 
 func _on_button_down() -> void:
+	if for_show: return
+	
 	if Input.is_action_pressed("ctrl"):
 		if SelectManager.is_in_selected_cubes(self):
 			SelectManager.remove_selected_cube(self)

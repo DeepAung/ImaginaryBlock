@@ -1,59 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://chgydpx4u3ci2"]
+[gd_scene load_steps=3 format=3 uid="uid://chgydpx4u3ci2"]
 
+[ext_resource type="BitMap" uid="uid://bm2m1wae7wpk1" path="res://assets/sprites/cube/cube-mask.png" id="1_8omv0"]
 [ext_resource type="Script" path="res://src/cube/cube.gd" id="1_7081j"]
-[ext_resource type="Texture2D" uid="uid://c2210pmh0ep7o" path="res://assets/sprites/cube/cube.png" id="1_slsp3"]
-[ext_resource type="BitMap" uid="uid://cpuq14up073vq" path="res://assets/sprites/cube/cube-mask.png" id="2_6teg4"]
 
 [node name="TextureButton" type="TextureButton" groups=["cubes"]]
-offset_right = 500.0
-offset_bottom = 500.0
-scale = Vector2(0.25, 0.25)
+offset_right = 120.0
+offset_bottom = 122.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-texture_click_mask = ExtResource("2_6teg4")
+texture_click_mask = ExtResource("1_8omv0")
 script = ExtResource("1_7081j")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(250, 216.3)
+position = Vector2(60, 52)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831)
+polygon = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26)
 
 [node name="Line2D" type="Line2D" parent="Area2D"]
 visible = false
-points = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831, 0, -208.706, 239.562, -104.831)
+points = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26, 0, -52, 60, -26)
 width = 0.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="SelectLine2D" type="Line2D" parent="Area2D"]
 visible = false
 z_index = 100
-points = PackedVector2Array(0, -208.706, 239.562, -104.831, 239.719, 172.137, 0, 275.856, -239.719, 172.137, -239.563, -104.831, 0, -208.706, 239.562, -104.831)
+points = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26, 0, -52, 60, -26)
+width = 2.0
 default_color = Color(0.533333, 0.788235, 1, 0.392157)
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("1_slsp3")
-offset = Vector2(0.15625, 34.05)
-
-[node name="Sprite" type="Node" parent="Area2D"]
+[node name="Sprite" type="Node2D" parent="Area2D"]
 
 [node name="Top" type="Polygon2D" parent="Area2D/Sprite"]
-visible = false
+position = Vector2(0, -26)
 color = Color(0.866667, 0.901961, 0.929412, 1)
-polygon = PackedVector2Array(62.5, 54.0703, 122.398, 27.875, 62.5156, 1.89063, 2.60938, 27.8594)
+polygon = PackedVector2Array(0, 26, 60, 0, 0, -26, -60, 0)
 
 [node name="Front" type="Polygon2D" parent="Area2D/Sprite"]
-visible = false
+position = Vector2(-30, 22)
 color = Color(0.601289, 0.697347, 0.770753, 1)
-polygon = PackedVector2Array(2.60938, 27.8594, 62.5156, 54.0703, 62.5547, 123.406, 2.57031, 97.1016)
+offset = Vector2(-30, -74)
+polygon = PackedVector2Array(0, 26, 60, 52, 60, 122, 0, 96)
 
 [node name="Side" type="Polygon2D" parent="Area2D/Sprite"]
-visible = false
+position = Vector2(30, 22)
 color = Color(0.390522, 0.491165, 0.567049, 1)
-polygon = PackedVector2Array(62.5, 54.0703, 122.391, 27.8828, 122.422, 97.1016, 62.5547, 123.414)
+offset = Vector2(-90, -74)
+polygon = PackedVector2Array(60, 52, 120, 26, 120, 96, 60, 122)
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

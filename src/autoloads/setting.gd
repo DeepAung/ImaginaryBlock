@@ -1,7 +1,7 @@
 extends Node
 
 
-const CUBE_BORDER: float = 10
+const CUBE_BORDER: float = 2
 var cube_border: float = CUBE_BORDER
 var menu_visible: bool = false
 
