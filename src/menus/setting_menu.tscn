@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwoeqe3vq3lks"]
+[gd_scene load_steps=9 format=3 uid="uid://cwoeqe3vq3lks"]
 
 [ext_resource type="Script" path="res://src/menus/setting_menu.gd" id="1_ytqv2"]
 [ext_resource type="Texture2D" uid="uid://devxholhxj4rf" path="res://assets/sprites/buttons/back.png" id="2_vj35i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://6t3pwtx2223v" path="res://src/themes/setting_theme.tres" id="3_d1vq0"]
 [ext_resource type="BitMap" uid="uid://bm2m1wae7wpk1" path="res://assets/sprites/cube/cube-mask.png" id="5_idvs8"]
 [ext_resource type="Script" path="res://src/cube/cube.gd" id="7_4teyn"]
+[ext_resource type="PackedScene" uid="uid://pvurgwnghhsq" path="res://src/utils/circle_polygon.tscn" id="7_4vulb"]
 
 [sub_resource type="SystemFont" id="SystemFont_kgkbg"]
 font_names = PackedStringArray("Bungee")
@@ -60,9 +61,9 @@ texture_pressed = ExtResource("3_3d3ae")
 [node name="CubeBorder" type="Control" parent="Background"]
 layout_mode = 2
 anchors_preset = 0
-offset_left = 346.0
+offset_left = 396.0
 offset_top = 566.0
-offset_right = 346.0
+offset_right = 396.0
 offset_bottom = 566.0
 
 [node name="CubeBorderSlider" type="HSlider" parent="Background/CubeBorder"]
@@ -74,6 +75,7 @@ offset_bottom = -267.0
 scale = Vector2(3, 3)
 max_value = 40.0
 step = 2.0
+value = 2.0
 
 [node name="CubeBorderReset" type="Button" parent="Background/CubeBorder"]
 layout_mode = 0
@@ -86,15 +88,53 @@ text = "RESET"
 
 [node name="Label" type="Label" parent="Background/CubeBorder"]
 layout_mode = 0
-offset_left = 94.0
+offset_left = 6.0
 offset_top = -275.0
-offset_right = 398.0
+offset_right = 310.0
 offset_bottom = -229.0
 text = "Cube Border"
 vertical_alignment = 1
 
+[node name="SnapStrength" type="Control" parent="Background"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 396.0
+offset_top = 725.0
+offset_right = 396.0
+offset_bottom = 725.0
+
+[node name="SnapStrengthSlider" type="HSlider" parent="Background/SnapStrength"]
+layout_mode = 0
+offset_left = 634.0
+offset_top = -293.0
+offset_right = 828.0
+offset_bottom = -267.0
+scale = Vector2(3, 3)
+min_value = 5.0
+max_value = 30.0
+step = 5.0
+value = 20.0
+
+[node name="SnapStrengthReset" type="Button" parent="Background/SnapStrength"]
+layout_mode = 0
+offset_left = 437.0
+offset_top = -280.0
+offset_right = 554.0
+offset_bottom = -222.0
+theme_override_font_sizes/font_size = 24
+text = "RESET"
+
+[node name="Label" type="Label" parent="Background/SnapStrength"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -275.0
+offset_right = 368.0
+offset_bottom = -229.0
+text = "Snap Strength"
+vertical_alignment = 1
+
 [node name="ShowCube" type="Area2D" parent="Background" groups=["show_cube"]]
-position = Vector2(955, 668)
+position = Vector2(955, 766)
 scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 0
@@ -148,6 +188,36 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 texture_click_mask = ExtResource("5_idvs8")
 
+[node name="ShowAreaDetectors" type="Node2D" parent="Background/ShowCube"]
+
+[node name="Center" parent="Background/ShowCube/ShowAreaDetectors" instance=ExtResource("7_4vulb")]
+color = Color(0, 0.760784, 0.760784, 0.588235)
+polygon = PackedVector2Array(20, 0, 19.0211, 6.18034, 16.1803, 11.7557, 11.7557, 16.1803, 6.18034, 19.0211, 2.38419e-06, 20, -6.18034, 19.0211, -11.7557, 16.1803, -16.1803, 11.7557, -19.0211, 6.18034, -20, 2.86102e-06, -19.0211, -6.18034, -16.1803, -11.7557, -11.7557, -16.1803, -6.18034, -19.0211, -9.53674e-07, -20, 6.18034, -19.0211, 11.7557, -16.1803, 16.1803, -11.7557, 19.0211, -6.18035)
+polygon_radius = 20.0
+multiplier = 1.0
+
+[node name="TopLeft" parent="Background/ShowCube/ShowAreaDetectors" instance=ExtResource("7_4vulb")]
+position = Vector2(-60, -26)
+color = Color(0, 0.760784, 0.760784, 0.588235)
+polygon = PackedVector2Array(20, 0, 19.0211, 6.18034, 16.1803, 11.7557, 11.7557, 16.1803, 6.18034, 19.0211, 2.38419e-06, 20, -6.18034, 19.0211, -11.7557, 16.1803, -16.1803, 11.7557, -19.0211, 6.18034, -20, 2.86102e-06, -19.0211, -6.18034, -16.1803, -11.7557, -11.7557, -16.1803, -6.18034, -19.0211, -9.53674e-07, -20, 6.18034, -19.0211, 11.7557, -16.1803, 16.1803, -11.7557, 19.0211, -6.18035)
+polygon_radius = 20.0
+multiplier = 1.0
+
+[node name="TopRight" parent="Background/ShowCube/ShowAreaDetectors" instance=ExtResource("7_4vulb")]
+position = Vector2(60, -26)
+color = Color(0, 0.760784, 0.760784, 0.588235)
+polygon = PackedVector2Array(20, 0, 19.0211, 6.18034, 16.1803, 11.7557, 11.7557, 16.1803, 6.18034, 19.0211, 2.38419e-06, 20, -6.18034, 19.0211, -11.7557, 16.1803, -16.1803, 11.7557, -19.0211, 6.18034, -20, 2.86102e-06, -19.0211, -6.18034, -16.1803, -11.7557, -11.7557, -16.1803, -6.18034, -19.0211, -9.53674e-07, -20, 6.18034, -19.0211, 11.7557, -16.1803, 16.1803, -11.7557, 19.0211, -6.18035)
+polygon_radius = 20.0
+multiplier = 1.0
+
+[node name="Bottom" parent="Background/ShowCube/ShowAreaDetectors" instance=ExtResource("7_4vulb")]
+position = Vector2(0, 70)
+color = Color(0, 0.760784, 0.760784, 0.588235)
+polygon = PackedVector2Array(20, 0, 19.0211, 6.18034, 16.1803, 11.7557, 11.7557, 16.1803, 6.18034, 19.0211, 2.38419e-06, 20, -6.18034, 19.0211, -11.7557, 16.1803, -16.1803, 11.7557, -19.0211, 6.18034, -20, 2.86102e-06, -19.0211, -6.18034, -16.1803, -11.7557, -11.7557, -16.1803, -6.18034, -19.0211, -9.53674e-07, -20, 6.18034, -19.0211, 11.7557, -16.1803, 16.1803, -11.7557, 19.0211, -6.18035)
+polygon_radius = 20.0
+multiplier = 1.0
+
 [connection signal="pressed" from="Background/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="value_changed" from="Background/CubeBorder/CubeBorderSlider" to="." method="_on_cube_border_slider_value_changed"]
 [connection signal="pressed" from="Background/CubeBorder/CubeBorderReset" to="." method="_on_cube_border_reset_pressed"]
+[connection signal="pressed" from="Background/SnapStrength/SnapStrengthReset" to="." method="_on_cube_border_reset_pressed"]
+[connection signal="pressed" from="Background/SnapStrength/SnapStrengthReset" to="." method="_on_snap_strength_reset_pressed"]

@@ -33,45 +33,29 @@ func _create_graph_handler():
 		graph[i].resize(len(Cube.JOIN_DIR))
 		graph[i].fill(-1)
 	
-	var cubes_pos = []
-	for i in range(len(cubes)):
-		cubes_pos.push_back([cubes[i].position, i])
-	
-	cubes_pos.sort()
+	var cubes_dict = {}
+	for u in range(len(cubes)):
+		cubes_dict[cubes[u]] = u
 	
 	for u in range(0, len(cubes)):
 		for u_join_dir in range(len(Cube.JOIN_ARRAY)):
 			var v_join_dir = Cube.get_reversed_join_dir(u_join_dir)
 			var dirs = Cube.JOIN_ARRAY[u_join_dir]
+			
+			var detector = cubes[u].EXACT_JOIN_AREA[u_join_dir][0] as Area2D
+			var detected_areas = detector.get_overlapping_areas() as Array[Cube]
+			
+			for detected_area in detected_areas:
+				var other_cube = detected_area.get_parent().get_parent()
+				var v = cubes_dict.get(other_cube)
 
-			# from: pos_a + offset_a == pos_b + offset_b
-			# to:   pos_a + offset_a - offset_b == pos_b
-			var target_pos = cubes[u].get_pos_offset(dirs[0]) - cubes[u].get_cube_offset(dirs[1])
-			
-			var start = lower_bound(cubes_pos, target_pos.x - 0.1)
-			var end = upper_bound(cubes_pos, target_pos.x + 0.1)
-			
-			for idx in range(start, end):
-				var v = cubes_pos[idx][1]
-				
-				if u == v: continue
-				if not _is_snap(u, dirs[0], v, dirs[1]): continue
-				
+				# if v is not in selected cubes
+				if v == null: continue
+
 				graph[u][u_join_dir] = v
 				graph[v][v_join_dir] = u
+				
 				break
-
-	# Old algo
-#	for i in range(0, len(cubes)):
-#		for j in range(i+1, len(cubes)):
-#			for k in range(len(Cube.JOIN_ARRAY)):
-#				var reversed_k = Cube.get_reversed_join_dir(k)
-#				var dirs = Cube.JOIN_ARRAY[k]
-#				if reversed_k == -1: printerr("reversed_k: ", reversed_k)
-#
-#				if _is_snap(i, dirs[0], j, dirs[1]):
-#					graph[i][k] = j
-#					graph[j][reversed_k] = i
 
 
 func _rotate_handler():
@@ -152,8 +136,8 @@ func _dfs(u: int):
 		if v == -1: continue
 		if visited[v]: continue
 		
-		# from cube[v].pos + cube[v].offset == cube[u].pos + cube[u].offset
-		# and solve the equation
+		# from v_pos + v_offset == u_pos + u_offset
+		# to   v_pos == u_pos + u_offset - v_offset
 		cubes[v].position = cubes[u].get_pos_offset(dirs[0]) - cubes[v].get_cube_offset(dirs[1])
 		
 		if k == Enum.ABOVE:

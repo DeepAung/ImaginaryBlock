@@ -22,7 +22,6 @@ script = ExtResource("3_ejfpo")
 [node name="CubeLayer" type="CanvasLayer" parent="."]
 
 [node name="CubesContainer" type="Node2D" parent="CubeLayer" groups=["cubes_container"]]
-z_index = 1
 y_sort_enabled = true
 
 [node name="TopLayer" type="CanvasLayer" parent="."]

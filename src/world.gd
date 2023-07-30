@@ -17,6 +17,7 @@ func _ready() -> void:
 	
 	_sort_cubes_handler()
 	
+	EventBus.cubes_changed.connect(_sort_cubes_handler)
 	EventBus.cube_clicked.connect(_on_cube_clicked)
 
 
@@ -101,10 +102,7 @@ func _get_best_snap() -> Cube.SnapResult:
 	if best_result.is_empty(): return null
 	
 	best_result.sort()
-	var snap_result = best_result[0] as Cube.SnapResult
-	print(snap_result.snapping_cube, " ", snap_result.snapped_cube, " ", snap_result.snap_offset, " ", snap_result.join_dir)
-	
-	return snap_result
+	return best_result[0]
 
 
 func _update_snap(snap_offset: Vector2, new_z_index: int):

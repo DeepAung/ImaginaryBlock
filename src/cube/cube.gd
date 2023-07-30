@@ -32,39 +32,79 @@ const JOIN_ARRAY = [
 const SNAP_RANGE = 20.0
 
 
-@onready var JOIN_AREA = [
-	[%BackLeft,   %TopLeft],
-	[%BackRight,  %TopRight],
-	[%FrontLeft,  %Center],
-	[%FrontRight, %Center],
-	[%Above,      %Center],
-	[%Under,      %Bottom],
-]
-
-@onready var EXACT_JOIN_AREA = [
-	[%ExactBackLeft,   %TopLeft],
-	[%ExactBackRight,  %TopRight],
-	[%ExactFrontLeft,  %Center],
-	[%ExactFrontRight, %Center],
-	[%ExactAbove,      %Center],
-	[%ExactUnder,      %Bottom],
-]
+@onready var show_cube: bool = self.is_in_group("show_cube")
 
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @onready var line_2d: Line2D = $Line2D
 @onready var select_line_2d: Line2D = $SelectLine2D
 
-@onready var for_show: bool = self.is_in_group("show_cube")
+
+# only exist in show_cube
+var show_center: CirclePolygon = null
+var show_top_left: CirclePolygon = null
+var show_top_right: CirclePolygon = null
+var show_bottom: CirclePolygon = null
+
+# only exist in non show_cube
+var collision_shape: CollisionShape2D = null
+var JOIN_AREA = []
+var EXACT_JOIN_AREA = []
+
+
+func _ready() -> void:
+	if show_cube:
+		show_center = $ShowAreaDetectors/Center
+		show_top_left = $ShowAreaDetectors/TopLeft
+		show_top_right = $ShowAreaDetectors/TopRight
+		show_bottom = $ShowAreaDetectors/Bottom
+	else:
+		# collision_shape is shared amongs AreaDetectors
+		collision_shape = $AreaDetectors/BackLeft/CollisionShape2D
+		
+		JOIN_AREA = [
+			[%BackLeft,   %TopLeft],
+			[%BackRight,  %TopRight],
+			[%FrontLeft,  %Center],
+			[%FrontRight, %Center],
+			[%Above,      %Center],
+			[%Under,      %Bottom],
+		]
+		
+		EXACT_JOIN_AREA = [
+			[%ExactBackLeft,   %TopLeft],
+			[%ExactBackRight,  %TopRight],
+			[%ExactFrontLeft,  %Center],
+			[%ExactFrontRight, %Center],
+			[%ExactAbove,      %Center],
+			[%ExactUnder,      %Bottom],
+		]
 
 
 func _process(delta: float) -> void:
-	# wait line_2d to be ready
-	if line_2d == null: return
 	
-	line_2d.width = Setting.cube_border
+	if line_2d != null:
+		line_2d.width = Setting.cube_border
+		
+		if line_2d.width == 0: line_2d.hide()
+		else: line_2d.show()
 	
-	if line_2d.width == 0: line_2d.hide()
-	else: line_2d.show()
+	
+	# only for show_cube
+	if not show_cube and collision_shape != null:
+		collision_shape.shape.radius = Setting.snap_range
+	
+	
+	if not show_cube: return
+	
+	# only for non show_cube
+	if show_center != null:
+		show_center.polygon_radius = Setting.snap_range
+	if show_top_left != null:
+		show_top_left.polygon_radius = Setting.snap_range
+	if show_top_right != null:
+		show_top_right.polygon_radius = Setting.snap_range
+	if show_bottom != null:
+		show_bottom.polygon_radius = Setting.snap_range
 
 
 # ---------------------------------------- #
@@ -86,6 +126,7 @@ static func get_reversed_join_dir(join_dir: JOIN_DIR) -> JOIN_DIR:
 
 func get_snap() -> SnapResult:
 	var best_snap_array = []
+	
 	for join_dir in range(len(JOIN_AREA)):
 		var detector = JOIN_AREA[join_dir][0] as Area2D
 		var detected_areas = detector.get_overlapping_areas() as Array[Cube]
@@ -201,7 +242,7 @@ static func snap_sort_compare(a, b):
 
 
 func _on_texture_button_button_down() -> void:
-	if for_show: return
+	if show_cube: return
 	
 	if Input.is_action_pressed("ctrl"):
 		if SelectManager.is_in_selected_cubes(self):

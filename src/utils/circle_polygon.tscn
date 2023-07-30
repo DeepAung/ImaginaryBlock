@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://pvurgwnghhsq"]
+
+[ext_resource type="Script" path="res://src/utils/circle_polygon.gd" id="1_vvciy"]
+
+[node name="CirclePolygon" type="Polygon2D"]
+polygon = PackedVector2Array(10, 0, 8.09017, 5.87785, 3.09017, 9.51056, -3.09017, 9.51056, -8.09017, 5.87785, -10, 4.76837e-07, -8.09017, -5.87785, -3.09017, -9.51056, 3.09017, -9.51056, 8.09017, -5.87785)
+script = ExtResource("1_vvciy")
+multiplier = null
