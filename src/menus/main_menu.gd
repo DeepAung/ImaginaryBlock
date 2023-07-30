@@ -12,7 +12,10 @@ var cube_scene = preload("res://src/cube/cube.tscn")
 
 func _on_cube_create_button_button_down() -> void:
 	var cube: Cube = cube_scene.instantiate()
-	cube.global_position = cube_create_button.global_position
+	var target_pos = cube_create_button.global_position \
+		+ cube_create_button.size * cube_create_button.scale / 2
+	
+	cube.global_position = target_pos
 	
 	cubes_container.add_child(cube)
 	

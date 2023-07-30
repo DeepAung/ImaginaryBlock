@@ -37,10 +37,10 @@ color = Color(0.94902, 0.960784, 0.972549, 1)
 
 [node name="CubeCreateButton" type="TextureButton" parent="."]
 layout_mode = 1
-offset_left = 35.0
-offset_top = 26.0
-offset_right = 535.0
-offset_bottom = 526.0
+offset_left = 40.1718
+offset_top = 25.0
+offset_right = 540.172
+offset_bottom = 525.0
 scale = Vector2(0.25, 0.25)
 focus_mode = 0
 mouse_default_cursor_shape = 2

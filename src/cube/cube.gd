@@ -1,4 +1,4 @@
-extends TextureButton
+extends Area2D
 class_name Cube
 
 
@@ -31,10 +31,28 @@ const JOIN_ARRAY = [
 
 const SNAP_RANGE = 20.0
 
-@onready var area_2d: Area2D = $Area2D
-@onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
-@onready var line_2d: Line2D = $Area2D/Line2D
-@onready var select_line_2d: Line2D = $Area2D/SelectLine2D
+
+@onready var JOIN_AREA = [
+	[%BackLeft,   %TopLeft],
+	[%BackRight,  %TopRight],
+	[%FrontLeft,  %Center],
+	[%FrontRight, %Center],
+	[%Above,      %Center],
+	[%Under,      %Bottom],
+]
+
+@onready var EXACT_JOIN_AREA = [
+	[%ExactBackLeft,   %TopLeft],
+	[%ExactBackRight,  %TopRight],
+	[%ExactFrontLeft,  %Center],
+	[%ExactFrontRight, %Center],
+	[%ExactAbove,      %Center],
+	[%ExactUnder,      %Bottom],
+]
+
+@onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
+@onready var line_2d: Line2D = $Line2D
+@onready var select_line_2d: Line2D = $SelectLine2D
 
 @onready var for_show: bool = self.is_in_group("show_cube")
 
@@ -67,58 +85,84 @@ static func get_reversed_join_dir(join_dir: JOIN_DIR) -> JOIN_DIR:
 
 
 func get_snap() -> SnapResult:
-	var areas: Array[Area2D] = area_2d.get_overlapping_areas()
-	var dists: Array = []
-
-	for area in areas:
-		var other_cube = area.get_parent() as Cube
+	var best_snap_array = []
+	for join_dir in range(len(JOIN_AREA)):
+		var detector = JOIN_AREA[join_dir][0] as Area2D
+		var detected_areas = detector.get_overlapping_areas() as Array[Cube]
 		
-		if SelectManager.is_in_selected_cubes(other_cube): continue
-		# TODO: if not has above front-left, front-right: continue
+		if detected_areas.is_empty(): continue
 		
-		var result = get_snap_to(other_cube)
-		var snap_dist = result[0]
-
-		if snap_dist == -1 or snap_dist > SNAP_RANGE: continue
-		dists.push_back(result)
-
-	if dists.is_empty(): return null
-
-	dists.sort_custom(snap_sort_compare)
-	var result = dists[0]
-	
-	var snap_offset = result[1]
-	var new_z_index = result[2]
-	var snapped_cube = result[3]
-	var join_dir = result[4]
-	
-	return SnapResult.new(self, snapped_cube, snap_offset, new_z_index, join_dir)
-
-
-func get_snap_to(other: Cube):
-	var min_dist = -1
-	var snap_offset = Vector2.ZERO
-	var new_z_index = other.z_index
-	var snapped_cube = null
-	var join_dir: JOIN_DIR
-	
-	for idx in range(len(JOIN_ARRAY) - 1):
-		var item = JOIN_ARRAY[idx]
+		var min_snap = _get_min_snap_of(detector, detected_areas, join_dir)
+		if min_snap == null: continue
 		
-		var my_pos = get_pos_offset(item[0])
-		var other_pos = other.get_pos_offset(item[1])
-		var cur_dist = my_pos.distance_to(other_pos)
-		
-		if min_dist == -1 or cur_dist < min_dist:
-			min_dist = cur_dist
-			snap_offset = other_pos - my_pos
-			snapped_cube = other
-			join_dir = idx
-
-			if idx == 4: new_z_index += 1 # above
-			elif idx == 5: new_z_index -= 1 # under
+		best_snap_array.push_back(min_snap)
 	
-	return [min_dist, snap_offset, new_z_index, snapped_cube, join_dir]
+	if best_snap_array.is_empty(): return null
+	
+	var best_snap = best_snap_array.min()
+	var snapped_cube: Cube = best_snap[1]
+	var join_dir: JOIN_DIR = best_snap[2]
+	
+	var snap_offset: Vector2 = _get_snap_offset(snapped_cube, join_dir)
+	var new_z_index: int = _get_new_z_index(snapped_cube, join_dir)
+	
+	if snap_offset.length() > SNAP_RANGE: return null
+	
+	return SnapResult.new(
+		self, snapped_cube, snap_offset, new_z_index, join_dir
+	)
+
+
+func _get_min_snap_of(detector: Area2D, detected_areas: Array[Area2D], join_dir: JOIN_DIR):
+	var snap_array = []
+	for detected_area in detected_areas:
+		var snapped_cube = detected_area.get_parent().get_parent() as Cube
+		
+		if SelectManager.is_in_selected_cubes(snapped_cube):
+			continue
+		
+		if _already_has_snap(snapped_cube, join_dir):
+			continue
+		
+		snap_array.push_back([
+			detector.position.distance_to(detected_area.position), 
+			snapped_cube, 
+			join_dir
+		])
+	
+	if snap_array.is_empty(): return null
+	return snap_array.min()
+
+
+func _get_snap_offset(snapped_cube: Cube, join_dir: JOIN_DIR) -> Vector2:
+	var dirs = JOIN_ARRAY[join_dir]
+	
+	var my_pos = get_pos_offset(dirs[0])
+	var other_pos = snapped_cube.get_pos_offset(dirs[1])
+	
+	var snap_offset = other_pos - my_pos
+	return snap_offset
+
+
+func _get_new_z_index(snapped_cube: Cube, join_dir: JOIN_DIR) -> int:
+	var new_z_index = snapped_cube.z_index
+	if join_dir == JOIN_DIR.ABOVE: new_z_index += 1
+	elif join_dir == JOIN_DIR.UNDER: new_z_index -= 1
+	
+	return new_z_index
+
+
+func _already_has_snap(snapped_cube: Cube, join_dir: JOIN_DIR) -> bool:
+	var reversed_join_dir = get_reversed_join_dir(join_dir)
+	var exact_detector = \
+		snapped_cube.EXACT_JOIN_AREA[reversed_join_dir][0] as Area2D
+	
+	var areas = exact_detector.get_overlapping_areas()
+	areas = areas.filter(func(area: Area2D):
+		return area.get_parent().get_parent() != self
+	)
+	
+	return not areas.is_empty()
 
 
 func get_pos_offset(direction: DIR) -> Vector2:
@@ -156,7 +200,7 @@ static func snap_sort_compare(a, b):
 # ---------------------------------------- #
 
 
-func _on_button_down() -> void:
+func _on_texture_button_button_down() -> void:
 	if for_show: return
 	
 	if Input.is_action_pressed("ctrl"):

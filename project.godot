@@ -74,6 +74,10 @@ ctrl_a={
 
 2d_physics/layer_1="Normal"
 2d_physics/layer_2="Cube"
+2d_physics/layer_3="TopLeft"
+2d_physics/layer_4="TopRight"
+2d_physics/layer_5="Center"
+2d_physics/layer_6="Bottom"
 
 [rendering]
 

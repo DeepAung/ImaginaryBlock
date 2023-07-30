@@ -12,7 +12,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Setting.is_menu_open(): return
 	if Input.is_action_pressed("alt"): return
-	
+
 	if Input.is_action_just_pressed("left_click"):
 		dragging = true
 		drag_start = get_global_mouse_position()
@@ -26,7 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	if not dragging: return
-	
+
 	draw_rect(
 		Rect2(drag_start, get_global_mouse_position() - drag_start),
 		Color(.5, .5, .5),
@@ -36,10 +36,10 @@ func _draw() -> void:
 
 func select_intersect_cubes():
 	var drag_end = get_global_mouse_position()
-	
+
 	var select_rect = RectangleShape2D.new()
 	select_rect.size = (drag_end - drag_start).abs()
-	
+
 	$CollisionShape2D.shape = select_rect
 	$CollisionShape2D.position = (drag_start + drag_end) / 2
 
@@ -50,5 +50,5 @@ func clear_select_area():
 
 
 func _on_area_entered(area: Area2D) -> void:
-	var cube = area.get_parent() as Cube
+	var cube = area as Cube
 	SelectManager.add_selected_cube(cube)

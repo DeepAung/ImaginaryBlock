@@ -1,56 +1,226 @@
-[gd_scene load_steps=3 format=3 uid="uid://chgydpx4u3ci2"]
+[gd_scene load_steps=6 format=3 uid="uid://chgydpx4u3ci2"]
 
 [ext_resource type="BitMap" uid="uid://bm2m1wae7wpk1" path="res://assets/sprites/cube/cube-mask.png" id="1_8omv0"]
 [ext_resource type="Script" path="res://src/cube/cube.gd" id="1_7081j"]
 
-[node name="TextureButton" type="TextureButton" groups=["cubes"]]
-offset_right = 120.0
-offset_bottom = 122.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-focus_mode = 0
-mouse_default_cursor_shape = 2
-texture_click_mask = ExtResource("1_8omv0")
-script = ExtResource("1_7081j")
+[sub_resource type="CircleShape2D" id="CircleShape2D_uwa4x"]
+radius = 20.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cl60v"]
+radius = 0.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7mx4p"]
+radius = 0.01
+
+[node name="Cube" type="Area2D" groups=["cubes"]]
 position = Vector2(60, 52)
 collision_layer = 2
 collision_mask = 2
+script = ExtResource("1_7081j")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26)
 
-[node name="Line2D" type="Line2D" parent="Area2D"]
+[node name="Line2D" type="Line2D" parent="."]
 visible = false
 points = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26, 0, -52, 60, -26)
 width = 0.0
 default_color = Color(0, 0, 0, 1)
 
-[node name="SelectLine2D" type="Line2D" parent="Area2D"]
+[node name="SelectLine2D" type="Line2D" parent="."]
 visible = false
 z_index = 100
 points = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26, 0, -52, 60, -26)
 width = 2.0
 default_color = Color(0.533333, 0.788235, 1, 0.392157)
 
-[node name="Sprite" type="Node2D" parent="Area2D"]
+[node name="Sprite" type="Node2D" parent="."]
 
-[node name="Top" type="Polygon2D" parent="Area2D/Sprite"]
+[node name="Top" type="Polygon2D" parent="Sprite"]
 position = Vector2(0, -26)
 color = Color(0.866667, 0.901961, 0.929412, 1)
 polygon = PackedVector2Array(0, 26, 60, 0, 0, -26, -60, 0)
 
-[node name="Front" type="Polygon2D" parent="Area2D/Sprite"]
+[node name="Front" type="Polygon2D" parent="Sprite"]
 position = Vector2(-30, 22)
 color = Color(0.601289, 0.697347, 0.770753, 1)
 offset = Vector2(-30, -74)
 polygon = PackedVector2Array(0, 26, 60, 52, 60, 122, 0, 96)
 
-[node name="Side" type="Polygon2D" parent="Area2D/Sprite"]
+[node name="Side" type="Polygon2D" parent="Sprite"]
 position = Vector2(30, 22)
 color = Color(0.390522, 0.491165, 0.567049, 1)
 offset = Vector2(-90, -74)
 polygon = PackedVector2Array(60, 52, 120, 26, 120, 96, 60, 122)
 
-[connection signal="button_down" from="." to="." method="_on_button_down"]
+[node name="AreaDetectors" type="Node2D" parent="."]
+
+[node name="BackLeft" type="Area2D" parent="AreaDetectors"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectors/BackLeft"]
+shape = SubResource("CircleShape2D_uwa4x")
+
+[node name="BackRight" type="Area2D" parent="AreaDetectors"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectors/BackRight"]
+shape = SubResource("CircleShape2D_uwa4x")
+
+[node name="FrontLeft" type="Area2D" parent="AreaDetectors"]
+unique_name_in_owner = true
+position = Vector2(60, -26)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectors/FrontLeft"]
+shape = SubResource("CircleShape2D_uwa4x")
+
+[node name="FrontRight" type="Area2D" parent="AreaDetectors"]
+unique_name_in_owner = true
+position = Vector2(-60, -26)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectors/FrontRight"]
+shape = SubResource("CircleShape2D_uwa4x")
+
+[node name="Above" type="Area2D" parent="AreaDetectors"]
+unique_name_in_owner = true
+position = Vector2(0, 70)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectors/Above"]
+shape = SubResource("CircleShape2D_uwa4x")
+
+[node name="Under" type="Area2D" parent="AreaDetectors"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectors/Under"]
+shape = SubResource("CircleShape2D_uwa4x")
+
+[node name="ExactAreaDetectors" type="Node2D" parent="."]
+
+[node name="ExactBackLeft" type="Area2D" parent="ExactAreaDetectors"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExactAreaDetectors/ExactBackLeft"]
+shape = SubResource("CircleShape2D_cl60v")
+
+[node name="ExactBackRight" type="Area2D" parent="ExactAreaDetectors"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExactAreaDetectors/ExactBackRight"]
+shape = SubResource("CircleShape2D_cl60v")
+
+[node name="ExactFrontLeft" type="Area2D" parent="ExactAreaDetectors"]
+unique_name_in_owner = true
+position = Vector2(60, -26)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExactAreaDetectors/ExactFrontLeft"]
+shape = SubResource("CircleShape2D_cl60v")
+
+[node name="ExactFrontRight" type="Area2D" parent="ExactAreaDetectors"]
+unique_name_in_owner = true
+position = Vector2(-60, -26)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExactAreaDetectors/ExactFrontRight"]
+shape = SubResource("CircleShape2D_cl60v")
+
+[node name="ExactAbove" type="Area2D" parent="ExactAreaDetectors"]
+unique_name_in_owner = true
+position = Vector2(0, 70)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExactAreaDetectors/ExactAbove"]
+shape = SubResource("CircleShape2D_cl60v")
+
+[node name="ExactUnder" type="Area2D" parent="ExactAreaDetectors"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExactAreaDetectors/ExactUnder"]
+shape = SubResource("CircleShape2D_cl60v")
+
+[node name="DetectedAreas" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Area2D" parent="DetectedAreas"]
+unique_name_in_owner = true
+position = Vector2(-60, -26)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectedAreas/TopLeft"]
+shape = SubResource("CircleShape2D_7mx4p")
+
+[node name="TopRight" type="Area2D" parent="DetectedAreas"]
+unique_name_in_owner = true
+position = Vector2(60, -26)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectedAreas/TopRight"]
+shape = SubResource("CircleShape2D_7mx4p")
+
+[node name="Center" type="Area2D" parent="DetectedAreas"]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectedAreas/Center"]
+shape = SubResource("CircleShape2D_7mx4p")
+
+[node name="Bottom" type="Area2D" parent="DetectedAreas"]
+unique_name_in_owner = true
+position = Vector2(0, 70)
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectedAreas/Bottom"]
+shape = SubResource("CircleShape2D_7mx4p")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -60.0
+offset_top = -52.0
+offset_right = 60.0
+offset_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_click_mask = ExtResource("1_8omv0")
+
+[connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

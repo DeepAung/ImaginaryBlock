@@ -93,57 +93,60 @@ offset_bottom = -229.0
 text = "Cube Border"
 vertical_alignment = 1
 
-[node name="ShowCube" type="TextureButton" parent="Background" groups=["show_cube"]]
-layout_mode = 2
-offset_left = 836.0
-offset_top = 563.0
-offset_right = 956.0
-offset_bottom = 685.0
+[node name="ShowCube" type="Area2D" parent="Background" groups=["show_cube"]]
+position = Vector2(955, 668)
 scale = Vector2(2, 2)
-focus_mode = 0
-mouse_default_cursor_shape = 2
-texture_click_mask = ExtResource("5_idvs8")
-script = ExtResource("7_4teyn")
-
-[node name="Area2D" type="Area2D" parent="Background/ShowCube"]
-position = Vector2(60, 52)
 collision_layer = 0
 collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("7_4teyn")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/ShowCube/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/ShowCube"]
 polygon = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26)
 
-[node name="Line2D" type="Line2D" parent="Background/ShowCube/Area2D"]
+[node name="Line2D" type="Line2D" parent="Background/ShowCube"]
 visible = false
 points = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26, 0, -52, 60, -26)
 width = 0.0
 default_color = Color(0, 0, 0, 1)
 
-[node name="SelectLine2D" type="Line2D" parent="Background/ShowCube/Area2D"]
+[node name="SelectLine2D" type="Line2D" parent="Background/ShowCube"]
 visible = false
 z_index = 100
 points = PackedVector2Array(0, -52, 60, -26, 60, 44, 0, 70, -60, 44, -60, -26, 0, -52, 60, -26)
 width = 2.0
 default_color = Color(0.533333, 0.788235, 1, 0.392157)
 
-[node name="Sprite" type="Node2D" parent="Background/ShowCube/Area2D"]
+[node name="Sprite" type="Node2D" parent="Background/ShowCube"]
 
-[node name="Top" type="Polygon2D" parent="Background/ShowCube/Area2D/Sprite"]
+[node name="Top" type="Polygon2D" parent="Background/ShowCube/Sprite"]
 position = Vector2(0, -26)
 color = Color(0.866667, 0.901961, 0.929412, 1)
 polygon = PackedVector2Array(0, 26, 60, 0, 0, -26, -60, 0)
 
-[node name="Front" type="Polygon2D" parent="Background/ShowCube/Area2D/Sprite"]
+[node name="Front" type="Polygon2D" parent="Background/ShowCube/Sprite"]
 position = Vector2(-30, 22)
 color = Color(0.601289, 0.697347, 0.770753, 1)
 offset = Vector2(-30, -74)
 polygon = PackedVector2Array(0, 26, 60, 52, 60, 122, 0, 96)
 
-[node name="Side" type="Polygon2D" parent="Background/ShowCube/Area2D/Sprite"]
+[node name="Side" type="Polygon2D" parent="Background/ShowCube/Sprite"]
 position = Vector2(30, 22)
 color = Color(0.390522, 0.491165, 0.567049, 1)
 offset = Vector2(-90, -74)
 polygon = PackedVector2Array(60, 52, 120, 26, 120, 96, 60, 122)
+
+[node name="TextureButton" type="TextureButton" parent="Background/ShowCube"]
+offset_left = -60.0
+offset_top = -52.0
+offset_right = 60.0
+offset_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_click_mask = ExtResource("5_idvs8")
 
 [connection signal="pressed" from="Background/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="value_changed" from="Background/CubeBorder/CubeBorderSlider" to="." method="_on_cube_border_slider_value_changed"]
