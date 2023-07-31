@@ -15,10 +15,11 @@
 ## Example (ตัวอย่าง)
 
 ### Main Menu
-![Annotation 2023-07-31 134611](https://github.com/DeepAung/ImaginaryBlock/assets/87839907/82ad23f2-0579-4c0e-aef6-759da889101a)
+![Annotation 2023-07-31 134611](https://github.com/DeepAung/ImaginaryBlock/assets/87839907/13686fa8-62b8-45f9-a1af-b23ef6f9336e)
 
 ### Tutorial Menu
-![Annotation 2023-07-31 134628](https://github.com/DeepAung/ImaginaryBlock/assets/87839907/52952d28-6516-421a-817c-4c0b2e5079b9)
+![Annotation 2023-07-31 134628](https://github.com/DeepAung/ImaginaryBlock/assets/87839907/1547a70f-c68b-4509-9801-6dadee3842fd)
 
 ### Settings Menu
-![Annotation 2023-07-31 134652](https://github.com/DeepAung/ImaginaryBlock/assets/87839907/408636ed-d127-4a71-9f85-3c875d3e21a7)
+![Annotation 2023-07-31 134652](https://github.com/DeepAung/ImaginaryBlock/assets/87839907/94b5845d-8698-48ee-a036-5b04878eee40)
+
