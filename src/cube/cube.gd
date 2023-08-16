@@ -6,13 +6,15 @@ class SnapResult:
 	var snapping_cube: Cube
 	var snapped_cube: Cube
 	var snap_offset: Vector2
+	var snap_distance: float
 	var new_z_index: int
 	var join_dir: int
 	
-	func _init(snapping_cube: Cube, snapped_cube: Cube, snap_offset: Vector2, new_z_index: int, join_dir: int) -> void:
+	func _init(snapping_cube: Cube, snapped_cube: Cube, snap_offset: Vector2, snap_distance: float, new_z_index: int, join_dir: int) -> void:
 		self.snapping_cube = snapping_cube
 		self.snapped_cube = snapped_cube
 		self.snap_offset = snap_offset
+		self.snap_distance = snap_distance
 		self.new_z_index = new_z_index
 		self.join_dir = join_dir
 
@@ -129,7 +131,7 @@ func get_snap() -> SnapResult:
 	
 	for join_dir in range(len(JOIN_AREA)):
 		var detector = JOIN_AREA[join_dir][0] as Area2D
-		var detected_areas = detector.get_overlapping_areas() as Array[Cube]
+		var detected_areas = detector.get_overlapping_areas() as Array[Area2D]
 		
 		if detected_areas.is_empty(): continue
 		
@@ -138,19 +140,23 @@ func get_snap() -> SnapResult:
 		
 		best_snap_array.push_back(min_snap)
 	
-	if best_snap_array.is_empty(): return null
+	if best_snap_array.is_empty():
+		return null
 	
 	var best_snap = best_snap_array.min()
+	
+	var distance: float = best_snap[0]
 	var snapped_cube: Cube = best_snap[1]
 	var join_dir: JOIN_DIR = best_snap[2]
 	
 	var snap_offset: Vector2 = _get_snap_offset(snapped_cube, join_dir)
 	var new_z_index: int = _get_new_z_index(snapped_cube, join_dir)
 	
-	if snap_offset.length() > SNAP_RANGE: return null
+	if snap_offset.length() > SNAP_RANGE:
+		return null
 	
 	return SnapResult.new(
-		self, snapped_cube, snap_offset, new_z_index, join_dir
+		self, snapped_cube, snap_offset, distance, new_z_index, join_dir
 	)
 
 
@@ -166,8 +172,8 @@ func _get_min_snap_of(detector: Area2D, detected_areas: Array[Area2D], join_dir:
 			continue
 		
 		snap_array.push_back([
-			detector.position.distance_to(detected_area.position), 
-			snapped_cube, 
+			detector.global_position.distance_to(detected_area.global_position), 
+			snapped_cube,
 			join_dir
 		])
 	

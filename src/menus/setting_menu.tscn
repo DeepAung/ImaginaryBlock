@@ -219,5 +219,5 @@ multiplier = 1.0
 
 [connection signal="pressed" from="Background/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="Background/CubeBorder/CubeBorderReset" to="." method="_on_cube_border_reset_pressed"]
-[connection signal="pressed" from="Background/SnapStrength/SnapStrengthReset" to="." method="_on_cube_border_reset_pressed"]
 [connection signal="pressed" from="Background/SnapStrength/SnapStrengthReset" to="." method="_on_snap_strength_reset_pressed"]
+[connection signal="pressed" from="Background/SnapStrength/SnapStrengthReset" to="." method="_on_cube_border_reset_pressed"]

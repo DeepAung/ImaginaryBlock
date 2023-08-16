@@ -101,16 +101,18 @@ func _get_best_snap() -> Cube.SnapResult:
 	
 	if best_result.is_empty(): return null
 	
-	best_result.sort()
+	best_result.sort_custom(func(a, b):
+		return a.snap_distance < b.snap_distance
+	)
+	
 	return best_result[0]
 
 
 func _update_snap(snap_offset: Vector2, new_z_index: int):
-	# find min z-index
-	var min_z_index: int = SelectManager.selected_cubes[0].z_index
-	for i in range(1, len(SelectManager.selected_cubes)):
-		var cube = SelectManager.selected_cubes[i]
-		min_z_index = min(min_z_index, cube.z_index)
+	
+	var min_z_index = SelectManager.selected_cubes \
+		.map(func(cube: Cube): return cube.z_index) \
+		.min()
 	
 	var delta_z_index = new_z_index - min_z_index
 	

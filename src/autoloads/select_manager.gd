@@ -32,7 +32,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Setting.is_menu_open(): return
 	
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click") and not Input.is_action_pressed("alt"):
 		clear_selected_cubes()
 
 
