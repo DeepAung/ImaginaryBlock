@@ -15,7 +15,7 @@
 <br />
 
 ## Download (ดาวน์โหลด)
-- [See the Releases](https://github.com/DeepAung/ImaginaryBlock/releases)
+- [https://deepaung.itch.io/imaginaryblock](https://deepaung.itch.io/imaginaryblock)
 
 <br />
 
